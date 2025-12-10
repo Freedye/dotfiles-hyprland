@@ -43,12 +43,12 @@
 | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-024358.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022314.png" /> |
 
 <div align="center">
-    <h2>• inspirations/copying •</h2>
+    <h2>• inspirations •</h2>
     <h3></h3>
 </div>
 
  <details> 
-  <summary>Inspiration</summary>
+  <summary>Click me</summary>
      
   - **Windows**: Some keybinds are the same for an easy switch.
   - **MacOS**: I tried to make it as simple as possibile, work is still needed but it's something.
