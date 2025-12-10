@@ -1,0 +1,92 @@
+@import url("file:///home/freedye/.cache/wal/colors-waybar.css");
+
+* {
+  font-family: Maple Mono;
+  font-size: 14px;
+  padding: 0px;
+  background: transparent;
+}
+
+window#waybar {
+  background-image: linear-gradient(to bottom, @background 100%);
+  padding: 0px;
+  border-style: none;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#network,
+#pulseaudio,
+#tray,
+#custom-power,
+#custom-hardware-wrap{
+    padding: 4px 8px;
+    color: @color7;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px @color0;
+}
+
+#pulseaudio:hover {
+  background-image: linear-gradient(to bottom, @color3 100%);
+  color: @color7;
+  transition-duration: 120ms;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: @color7;
+}
+
+#workspaces button:hover {
+    background: @color3;
+}
+
+#workspaces button.focused, #workspaces button.active {
+    background-color: @color3;
+    box-shadow: inset 0 -3px @color6;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+tooltip {
+  background-color: @color0;
+  color: @color7;
+}
+
+#tray menu {
+  background-color: @color0;
+  color: @color7;
+  padding: 4px;
+}
+#tray menu menuitem {
+  background-image: linear-gradient(to bottom, @color0 100%);
+  margin: 3px;
+  color: @color7;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: @color0;
+}
+#tray menu menuitem:hover {
+  background-image: linear-gradient(to bottom, @color7 100%);
+  color: @color3;
+  font-weight: bold;
+}

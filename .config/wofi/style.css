@@ -1,0 +1,62 @@
+@import url("file:///home/freedye/.cache/wal/colors-waybar.css");
+
+* {
+  font-family: Maple Mono;
+  background: transparent;
+  color: @color7;
+}
+
+#window {
+  color: @color7;
+
+  /*Linear gradient background instead of standard background, because it makes cleaner border-radius cuts, issa bug :p*/
+  background-image: linear-gradient(to bottom, @color0 100%);
+}
+
+#inner-box {
+  padding-top: 12px;
+}
+#entry {
+  border-style: none;
+  border-color: @color7;
+  color: @color7;
+  padding: 6px;
+  margin-bottom: 8px;
+  margin-left: 12px;
+  margin-right: 12;
+}
+
+#entry:selected {
+  background: @color3;
+  color: @color7;
+  font-weight: bold;
+  outline: none;
+}
+
+#input {
+  background-color: @color0;
+  color: @color7;
+  border-color: @color7;
+
+  border-style: none;
+  border-bottom-style: solid;
+  border-width: 1px;
+
+  font-style: normal;
+
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+
+  padding: 12px;
+  margin: 8px;
+}
+#input:focus {
+  background: @color3;
+  background-color: @color3;
+  box-shadow: none;
+}
+
+#img {
+  padding: 4px;
+  margin-right: 6px;
+}
