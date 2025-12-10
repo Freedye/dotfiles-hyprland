@@ -40,7 +40,7 @@
 |:---|:---------------|
 | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022222.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022215.png" /> |
 | Wallpaper change | Automatic color switch with pywal16 |
-| <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022239.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022314.png" /> |
+| <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-024358.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022314.png" /> |
 
 <div align="center">
     <h2>• inspirations/copying •</h2>
@@ -52,4 +52,6 @@
      
   - **Windows**: Some keybinds are the same for an easy switch.
   - **MacOS**: I tried to make it as simple as possibile, work is still needed but it's something.
+  - **[@diinki](https://github.com/diinki)**: Without their video I wouldn’t have even started.
+  - **[@BreadOnPenguins](https://github.com/BreadOnPenguins)**: Her channel and her tips helped me to stay focused while I was learning new stuff.
 </details>
