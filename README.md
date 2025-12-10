@@ -29,6 +29,7 @@
   - **wlogout**: To go out and touch some grass
   - **wofi**: The launcher
   - **grim & slurp**: The screenshoot utility
+  - **wl-copy**: The clipboard utility
 </details>
 
 <div align="center">
