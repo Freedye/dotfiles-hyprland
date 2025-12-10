@@ -21,11 +21,11 @@
      
   - **Hyprland**: The compositor
   - **Hyprlock**: The screen lock
-  - **Hyprpaper & waypaper**: The wallpaper utility
+  - **Hyprpaper & waypaper**: The wallpapers utility
   - **fastfetch**: To fetch system infos
   - **kitty**: The terminal
   - **mako**: The notification daemon
-  - **waybar**: the upper bar
+  - **waybar**: The upper bar
   - **wlogout**: To go out and touch some grass
   - **wofi**: The launcher
   - **grim & slurp**: The screenshoot utility
