@@ -39,7 +39,7 @@
 
 | Base view | Some programs |
 |:---|:---------------|
-| <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022222.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022215.png" /> |
+| <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022222.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/Screenshot gio 11 dic 2025, 17:40:01.png" /> |
 | Wallpaper change | Automatic color switch with pywal16 |
 | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-024358.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022314.png" /> |
 
