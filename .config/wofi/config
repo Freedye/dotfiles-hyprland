@@ -11,4 +11,5 @@ lines=8
 width=500
 no_actions=true
 prompt= Ricerca
+sort_order=alphabetical
 hide_scroll=true
