@@ -22,7 +22,6 @@ window#waybar {
 #network,
 #pulseaudio,
 #tray,
-#custom-power,
 #custom-hardware-wrap{
     padding: 4px 8px;
     color: @color7;
@@ -89,4 +88,9 @@ tooltip {
   background-image: linear-gradient(to bottom, @color7 100%);
   color: @color3;
   font-weight: bold;
+}
+
+#custom-power {
+    padding: 2px 8px;
+    font-size: 20px
 }
