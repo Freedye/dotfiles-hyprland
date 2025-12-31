@@ -21,6 +21,7 @@
      
   - **Hyprland**: The compositor
   - **Hyprlock**: The screen lock
+  - **Hypridle**: The idle utility
   - **Hyprpaper & waypaper**: The wallpapers utility
   - **fastfetch**: To fetch system infos
   - **kitty**: The terminal
