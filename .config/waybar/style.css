@@ -42,7 +42,7 @@ button:hover {
 }
 
 #pulseaudio:hover {
-  background-image: linear-gradient(to bottom, @color3 100%);
+  background-image: linear-gradient(to bottom, @color8 100%);
   color: @color7;
   transition-duration: 120ms;
 }
@@ -54,11 +54,11 @@ button:hover {
 }
 
 #workspaces button:hover {
-    background: @color3;
+    background: @color8;
 }
 
 #workspaces button.focused, #workspaces button.active {
-    background-color: @color3;
+    background-color: @color8;
     box-shadow: inset 0 -3px @color6;
 }
 
@@ -86,7 +86,7 @@ tooltip {
 }
 #tray menu menuitem:hover {
   background-image: linear-gradient(to bottom, @color7 100%);
-  color: @color3;
+  color: @color8;
   font-weight: bold;
 }
 

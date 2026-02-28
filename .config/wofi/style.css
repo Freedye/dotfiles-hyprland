@@ -18,7 +18,7 @@
 }
 #entry {
   border-style: none;
-  border-color: @color7;
+  border-color: @color8;
   color: @color7;
   padding: 6px;
   margin-bottom: 8px;
@@ -27,7 +27,7 @@
 }
 
 #entry:selected {
-  background: @color3;
+  background: @color5;
   color: @color7;
   font-weight: bold;
   outline: none;

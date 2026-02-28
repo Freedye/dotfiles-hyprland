@@ -23,7 +23,7 @@ button {
 }
 
 button:hover {
-	background-color: @color3;
+	background-color: @color8;
 	outline-style: none;
 }
 
