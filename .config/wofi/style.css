@@ -51,8 +51,8 @@
   margin: 8px;
 }
 #input:focus {
-  background: @color3;
-  background-color: @color3;
+  background: @color8;
+  background-color: @color8;
   box-shadow: none;
 }
 
