@@ -1,0 +1,18 @@
+-- Pywal colors
+
+color0 = "#2e1b28"
+color1 = "#6D6C9C"
+color2 = "#2E71F7"
+color3 = "#9C6BA0"
+color4 = "#3D8FE3"
+color5 = "#60AEFA"
+color6 = "#A9BDC9"
+color7 = "#cac6c9"
+color8 = "#7b6574"
+color9 = "#6D6C9C"
+color10 = "#2E71F7"
+color11 = "#9C6BA0"
+color12 = "#3D8FE3"
+color13 = "#60AEFA"
+color14 = "#A9BDC9"
+color15 = "#cac6c9"
