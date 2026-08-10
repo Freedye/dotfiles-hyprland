@@ -105,4 +105,4 @@ source $ZSH/oh-my-zsh.sh
 
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+command -v ng &>/dev/null && source <(ng completion script)
