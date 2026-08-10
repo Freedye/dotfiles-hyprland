@@ -58,14 +58,14 @@
   - **[rose-pine-hyprcursor](https://github.com/ndom91/rose-pine-hyprcursor)**: cursor theme
   - **Adwaita GTK theme** (dark variant) and **qt6ct**: GTK/Qt theming
   - **hyprpolkitagent**: polkit authentication agent
-  - **xembedsniproxy**: XEmbed system tray proxy (installed at `/usr/local/bin`)
+  - **[xembedsniproxy](https://github.com/Freedye/xembedsniproxy-standalone)**: XEmbed system tray proxy (installed at `/usr/local/bin`)
   - **[hyprshutdown](https://github.com/hyprwm/contrib)** *(optional)*: nicer shutdown/logout menu, falls back to `hyprctl dispatch exit` if missing
 
   To use these configs, clone the repo and symlink (or copy) the folders/files you want into your `$HOME` and `~/.config`, e.g.:
 
   ```sh
-  git clone https://github.com/Freedye/dot_files.git
-  cd dot_files
+  git clone https://github.com/Freedye/dotfiles-hyprland.git
+  cd dotfiles-hyprland
   ln -s "$PWD/.config/hypr"     ~/.config/hypr
   ln -s "$PWD/.config/waybar"   ~/.config/waybar
   ln -s "$PWD/.config/kitty"    ~/.config/kitty
