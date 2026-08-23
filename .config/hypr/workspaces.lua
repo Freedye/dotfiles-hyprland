@@ -67,6 +67,12 @@ hl.window_rule({
     float = true,
 })
 
+hl.window_rule({
+    name = "wow-fullscreen",
+    match = { title = "World of Warcraft"},
+    fullscreen = true,
+})
+
 -- Floating user programs
 hl.window_rule({
     name  = "floating-ProtonUp-Qt",
