@@ -68,6 +68,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name  = "tile-battlenet",
+    match = {
+        class = "steam_app_default",
+        title = "Battle.net"
+    },
+    tile = true,
+})
+
+hl.window_rule({
     name = "wow-fullscreen",
     match = { title = "World of Warcraft"},
     fullscreen = true,
