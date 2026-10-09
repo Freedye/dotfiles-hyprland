@@ -88,9 +88,3 @@ hl.window_rule({
     match = { class = "net.davidotek.pupgui2" },
     float = true,
 })
-
-hl.window_rule({
-    name  = "floating-waypaper",
-    match = { class = "waypaper" },
-    float = true,
-})
