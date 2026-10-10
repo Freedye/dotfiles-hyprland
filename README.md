@@ -27,8 +27,7 @@
   - **kitty**: The terminal
   - **mako**: The notification daemon
   - **pcmanfm**: The file manager
-  - **waybar**: The upper bar
-  - **wlogout**: To go out and touch some grass
+  - **quickshell**: The upper bar, tray and power menu
   - **wofi**: The launcher
   - **grim & slurp**: The screenshoot utility
   - **wl-copy**: The clipboard utility
@@ -59,22 +58,20 @@
   - **Adwaita GTK theme** (dark variant) and **qt6ct**: GTK/Qt theming
   - **hyprpolkitagent**: polkit authentication agent
   - **[xembedsniproxy](https://github.com/Freedye/xembedsniproxy-standalone)**: XEmbed system tray proxy (installed at `/usr/local/bin`)
-  - **[hyprshutdown](https://github.com/hyprwm/contrib)** *(optional)*: nicer shutdown/logout menu, falls back to `hyprctl dispatch exit` if missing
 
   To use these configs, clone the repo and symlink (or copy) the folders/files you want into your `$HOME` and `~/.config`, e.g.:
 
   ```sh
   git clone https://github.com/Freedye/dotfiles-hyprland.git
   cd dotfiles-hyprland
-  ln -s "$PWD/.config/hypr"     ~/.config/hypr
-  ln -s "$PWD/.config/waybar"   ~/.config/waybar
-  ln -s "$PWD/.config/kitty"    ~/.config/kitty
-  ln -s "$PWD/.config/mako"     ~/.config/mako
-  ln -s "$PWD/.config/wofi"     ~/.config/wofi
-  ln -s "$PWD/.config/wlogout"  ~/.config/wlogout
-  ln -s "$PWD/.config/waypaper" ~/.config/waypaper
-  ln -s "$PWD/.config/fastfetch" ~/.config/fastfetch
-  ln -s "$PWD/.zshrc"           ~/.zshrc
+  ln -s "$PWD/.config/hypr"       ~/.config/hypr
+  ln -s "$PWD/.config/quickshell" ~/.config/quickshell
+  ln -s "$PWD/.config/kitty"      ~/.config/kitty
+  ln -s "$PWD/.config/mako"       ~/.config/mako
+  ln -s "$PWD/.config/wofi"       ~/.config/wofi
+  ln -s "$PWD/.config/waypaper"   ~/.config/waypaper
+  ln -s "$PWD/.config/fastfetch"  ~/.config/fastfetch
+  ln -s "$PWD/.zshrc"             ~/.zshrc
   ```
 
   Then replace the `<PATH_TO_...>` placeholders (wallpaper, profile picture, waypaper stylesheet) in `hyprpaper.conf`, `hyprlock.conf` and `waypaper/config.ini` with your own paths.
