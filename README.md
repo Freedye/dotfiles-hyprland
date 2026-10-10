@@ -21,7 +21,7 @@
      
   - **Hyprland**: The compositor
   - **Hyprlock**: The screen lock
-  - **Hyprpaper & waypaper**: The wallpapers utility
+  - **Hyprpaper**: The wallpapers utility
   - **pywal16**: Automatic color scheme generation from the wallpaper
   - **fastfetch**: To fetch system infos
   - **kitty**: The terminal
@@ -69,12 +69,11 @@
   ln -s "$PWD/.config/kitty"      ~/.config/kitty
   ln -s "$PWD/.config/mako"       ~/.config/mako
   ln -s "$PWD/.config/wofi"       ~/.config/wofi
-  ln -s "$PWD/.config/waypaper"   ~/.config/waypaper
   ln -s "$PWD/.config/fastfetch"  ~/.config/fastfetch
   ln -s "$PWD/.zshrc"             ~/.zshrc
   ```
 
-  Then replace the `<PATH_TO_...>` placeholders (wallpaper, profile picture, waypaper stylesheet) in `hyprpaper.conf`, `hyprlock.conf` and `waypaper/config.ini` with your own paths.
+  Then replace the `<PATH_TO_...>` placeholders (wallpaper, profile picture) in `hyprpaper.conf` and `hyprlock.conf` with your own paths.
 </details>
 
 <div align="center">
