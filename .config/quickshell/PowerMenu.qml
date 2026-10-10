@@ -69,9 +69,8 @@ PopupWindow {
 
         Column {
             id: col
-            x: 6
             y: 6
-            width: parent.width - 12
+            width: parent.width
             spacing: 1
 
             Repeater {
@@ -89,20 +88,35 @@ PopupWindow {
                     Rectangle {
                         visible: entry.sep
                         anchors.centerIn: parent
-                        width: parent.width - 12
+                        width: parent.width - 32
                         height: 1
                         color: Theme.alpha(Theme.dim, 0.5)
                     }
 
-                    // macOS-style solid highlight under the pointer
+                    // same hover as the bar: dim fill with a thin accent edge
                     Rectangle {
                         anchors.fill: parent
                         visible: !entry.sep
-                        color: hover.hovered ? Theme.accent : "transparent"
+                        color: hover.hovered ? Theme.dim : "transparent"
+
+                        Behavior on color {
+                            ColorAnimation { duration: 120 }
+                        }
+
+                        Rectangle {
+                            width: 3
+                            height: parent.height
+                            color: Theme.accent
+                            opacity: hover.hovered ? 1 : 0
+
+                            Behavior on opacity {
+                                NumberAnimation { duration: 120 }
+                            }
+                        }
 
                         Row {
                             anchors.verticalCenter: parent.verticalCenter
-                            x: 10
+                            x: 16
                             spacing: 10
 
                             Icon {
@@ -110,12 +124,11 @@ PopupWindow {
                                 width: 18
                                 text: entry.modelData.glyph ?? ""
                                 font.pixelSize: 15
-                                color: hover.hovered ? Theme.bg : Theme.dim
+                                color: hover.hovered ? Theme.accent : Theme.dim
                             }
                             Txt {
                                 anchors.verticalCenter: parent.verticalCenter
                                 text: entry.modelData.label ?? ""
-                                color: hover.hovered ? Theme.bg : Theme.fg
                             }
                         }
 
