@@ -82,7 +82,7 @@ Island {
                 glyph: Theme.ico.temp
                 value: `${Stats.temp}°C`
                 tint: root.tempTint
-                tip: Stats.temp >= 80 ? "Temperatura critica!" : `CPU  ${Stats.temp}°C`
+                tip: Stats.temp >= 80 ? "Temperatura critica!" : `GPU  ${Stats.temp}°C`
             }
 
             Rectangle {

@@ -5,7 +5,7 @@
 temp_file=""
 for d in /sys/class/hwmon/hwmon*; do
     case "$(cat "$d/name" 2>/dev/null)" in
-        k10temp|coretemp|zenpower) temp_file="$d/temp1_input"; break ;;
+        amdgpu) temp_file="$d/temp1_input"; break ;;
     esac
 done
 [ -z "$temp_file" ] && temp_file=/sys/class/thermal/thermal_zone0/temp
