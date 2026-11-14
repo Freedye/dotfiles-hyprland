@@ -1,7 +1,7 @@
 /* Flat theme that follows the live pywal palette, same look as the quickshell bar.
    bg = @background, fg = @foreground, accent = @color6, dim = @color8, warm = @color5 */
 @import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained-dark.css");
-@import url("file:///home/freedye/.cache/wal/colors-waybar.css");
+@import url("file:///home/user/.cache/wal/colors-waybar.css");
 
 @define-color theme_bg_color @background;
 @define-color theme_fg_color @foreground;

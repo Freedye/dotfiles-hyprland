@@ -1,0 +1,27 @@
+/* libadwaita ignores gtk-theme-name, so the pywal palette is applied through its named colors.
+   Same mapping as ~/.themes/wal-flat: bg = @background, fg = @foreground, accent = @color6, dim = @color8. */
+@import url("file:///home/user/.cache/wal/colors-waybar.css");
+
+@define-color window_bg_color @background;
+@define-color window_fg_color @foreground;
+@define-color view_bg_color @background;
+@define-color view_fg_color @foreground;
+@define-color headerbar_bg_color @background;
+@define-color headerbar_fg_color @foreground;
+@define-color headerbar_backdrop_color @background;
+@define-color headerbar_border_color alpha(@color8, 0.55);
+@define-color sidebar_bg_color @background;
+@define-color sidebar_fg_color @foreground;
+@define-color sidebar_backdrop_color @background;
+@define-color secondary_sidebar_bg_color @background;
+@define-color card_bg_color mix(@background, @foreground, 0.06);
+@define-color card_fg_color @foreground;
+@define-color dialog_bg_color @background;
+@define-color dialog_fg_color @foreground;
+@define-color popover_bg_color mix(@background, @foreground, 0.09);
+@define-color popover_fg_color @foreground;
+@define-color accent_bg_color @color8;
+@define-color accent_fg_color @foreground;
+@define-color accent_color @color6;
+@define-color warning_bg_color @color5;
+@define-color error_bg_color #eb4d4b;

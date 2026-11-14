@@ -1,0 +1,116 @@
+/* GTK4 counterpart of ../gtk-3.0/gtk.css: flat, follows the live pywal palette.
+   bg = @background, fg = @foreground, accent = @color6, dim = @color8.
+   The built-in GTK4 theme has its colors baked in, so the palette is applied with explicit rules. */
+@import url("resource:///org/gtk/libgtk/theme/Default/Default-dark.css");
+@import url("file:///home/user/.cache/wal/colors-waybar.css");
+
+* {
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+    outline-style: none;
+}
+
+window, window.background, dialog, .background, .view, textview text, listview, columnview, list, row,
+headerbar, .titlebar, notebook, notebook > stack, notebook > header, statusbar, actionbar, toolbar, box {
+    background-image: none;
+    background-color: @background;
+    color: @foreground;
+}
+label { color: inherit; }
+separator { background-color: alpha(@color8, 0.5); min-height: 1px; min-width: 1px; }
+notebook > header { border: none; box-shadow: inset 0 -1px alpha(@color8, 0.5); }
+notebook > stack { border: none; }
+
+/* buttons and tabs */
+button, notebook > header > tabs > tab {
+    background-image: none;
+    background-color: @background;
+    color: @foreground;
+    border: none;
+    box-shadow: inset 0 -1px alpha(@color8, 0.5);
+}
+button:hover, notebook > header > tabs > tab:hover { background-color: alpha(@color8, 0.5); }
+button:checked, button:active, notebook > header > tabs > tab:checked {
+    background-color: @color8;
+    box-shadow: inset 0 -3px @color6;
+}
+button:disabled { color: alpha(@foreground, 0.45); }
+button.suggested-action, button.destructive-action { background-color: @color8; }
+notebook > header > tabs > tab:checked { background-color: @background; }
+
+/* inputs */
+entry, spinbutton, dropdown > button, combobox button {
+    background-image: none;
+    background-color: mix(@background, @foreground, 0.09);
+    color: @foreground;
+    border: none;
+    box-shadow: inset 0 -2px @color8;
+}
+entry:focus-within, spinbutton:focus-within { box-shadow: inset 0 -2px @color6; }
+selection, entry selection, textview text selection { background-color: @color6; color: @background; }
+check, radio {
+    background-image: none;
+    background-color: mix(@background, @foreground, 0.09);
+    color: @foreground;
+    border: 1px solid @color8;
+}
+check:checked, radio:checked { background-color: @color6; color: @background; border-color: @color6; }
+switch { background-color: mix(@background, @foreground, 0.09); border: none; }
+switch:checked { background-color: @color8; }
+switch slider { background-color: @foreground; border: none; }
+switch:checked slider { background-color: @color6; }
+
+/* sliders */
+scale trough { background-color: alpha(@color8, 0.4); border: none; min-height: 4px; min-width: 4px; }
+scale highlight { background-color: @color6; border: none; }
+scale slider { background-color: @foreground; border: none; min-width: 6px; min-height: 14px; }
+scale slider:hover { background-color: @color6; }
+progressbar progress { background-color: @color6; }
+progressbar trough { background-color: alpha(@color8, 0.4); border: none; }
+levelbar block.filled { background-color: @color6; }
+levelbar block.empty { background-color: alpha(@color8, 0.4); }
+
+/* lists */
+row:hover, listview > row:hover { background-color: alpha(@color8, 0.5); }
+row:selected, listview > row:selected {
+    background-color: @color8;
+    color: @foreground;
+    box-shadow: inset 3px 0 @color6;
+}
+
+/* menus and popovers */
+popover, popover.background, popover > contents, tooltip, tooltip.background {
+    background-image: none;
+    background-color: mix(@background, @foreground, 0.09);
+    color: @foreground;
+    border: 1px solid alpha(@color8, 0.55);
+}
+popover modelbutton:hover, popover row:hover { background-color: @color8; box-shadow: inset 3px 0 @color6; }
+
+/* scrollbars: thin, no trough */
+scrollbar, scrollbar trough { background-color: transparent; border: none; }
+scrollbar slider { background-color: @color8; min-width: 6px; min-height: 6px; border: none; }
+scrollbar slider:hover { background-color: @color6; }
+
+/* same colors when the window loses focus */
+window:backdrop, dialog:backdrop, headerbar:backdrop, notebook > header:backdrop { background-color: @background; color: @foreground; }
+*:backdrop { -gtk-icon-effect: none; }
+
+/* the built-in theme's selectors are more specific than the rules above; the prefix wins over them */
+window:not(.zz):not(.zy) * { border-radius: 0; box-shadow: none; }
+window:not(.zz):not(.zy) scale trough { background-color: alpha(@color8, 0.4); }
+window:not(.zz):not(.zy) scale trough highlight { background-color: @color6; }
+window:not(.zz):not(.zy) scale trough slider { background-color: @foreground; min-width: 6px; min-height: 14px; }
+window:not(.zz):not(.zy) scale trough slider:hover { background-color: @color6; }
+window:not(.zz):not(.zy) notebook > header > tabs > tab:checked { box-shadow: inset 0 -3px @color6; }
+window:not(.zz):not(.zy) notebook > header > tabs > tab:hover { background-color: alpha(@color8, 0.5); }
+window:not(.zz):not(.zy) button { box-shadow: inset 0 -1px alpha(@color8, 0.5); }
+window:not(.zz):not(.zy) button:hover { background-color: alpha(@color8, 0.5); }
+window:not(.zz):not(.zy) button:checked { background-color: @color8; box-shadow: inset 0 -3px @color6; }
+window:not(.zz):not(.zy) entry:focus-within { box-shadow: inset 0 -2px @color6; }
+window:not(.zz):not(.zy) entry { box-shadow: inset 0 -2px @color8; }
+window:not(.zz):not(.zy) check:checked, window:not(.zz):not(.zy) radio:checked { background-color: @color6; color: @background; }
+window:not(.zz):not(.zy) slider { background-image: none; background-color: @foreground; border: none; border-radius: 0; min-width: 6px; min-height: 14px; }
+window:not(.zz):not(.zy) slider:hover { background-color: @color6; }

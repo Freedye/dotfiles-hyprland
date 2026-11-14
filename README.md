@@ -55,8 +55,7 @@
   Besides the [programs listed above](#software-overview), these dotfiles also expect:
   - **[Maple Mono](https://github.com/subframe7536/maple-font)**: font used across kitty, mako, wofi and hyprlock
   - **[rose-pine-hyprcursor](https://github.com/ndom91/rose-pine-hyprcursor)**: cursor theme
-  - **Adwaita GTK theme** (dark variant) and **qt6ct**: GTK/Qt theming
-  - **wal-flat**: flat GTK3 theme for pcmanfm that follows the live pywal16 palette (included under `.themes/wal-flat`)
+  - **wal-flat**: flat GTK theme that follows the live pywal16 palette, for GTK3 and GTK4 apps (included under `.themes/wal-flat`). libadwaita apps ignore GTK themes, so `.config/gtk-4.0/gtk.css` applies the same palette through their named colors
   - **hyprpolkitagent**: polkit authentication agent
   - **[xembedsniproxy](https://github.com/Freedye/xembedsniproxy-standalone)**: XEmbed system tray proxy (installed at `/usr/local/bin`)
 
@@ -73,9 +72,24 @@
   ln -s "$PWD/.config/fastfetch"  ~/.config/fastfetch
   ln -s "$PWD/.themes/wal-flat"   ~/.themes/wal-flat
   ln -s "$PWD/.zshrc"             ~/.zshrc
+  ln -s "$PWD/.gtkrc-2.0"         ~/.gtkrc-2.0
+
+  # single files, so the other contents of these folders are left alone
+  mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0 ~/.config/wal/templates
+  ln -s "$PWD/.config/gtk-3.0/settings.ini"        ~/.config/gtk-3.0/settings.ini
+  ln -s "$PWD/.config/gtk-4.0/settings.ini"        ~/.config/gtk-4.0/settings.ini
+  ln -s "$PWD/.config/gtk-4.0/gtk.css"             ~/.config/gtk-4.0/gtk.css
+  ln -s "$PWD/.config/wal/templates/colors-mako"   ~/.config/wal/templates/colors-mako
+
+  # GTK3 apps read the theme from gsettings first
+  gsettings set org.gnome.desktop.interface gtk-theme wal-flat
   ```
 
-  Then replace the `<PATH_TO_...>` placeholders (wallpaper, profile picture) in `hyprpaper.conf` and `hyprlock.conf` with your own paths.
+  Then, before linking:
+  - replace the `<PATH_TO_...>` placeholders (wallpaper, profile picture) in `hyprpaper.conf` and `hyprlock.conf` with your own paths;
+  - replace `/home/user` with your home directory in the files that contain it (GTK CSS cannot expand `~` or `$HOME`): `grep -rl /home/user --exclude-dir=.git --exclude=README.md . | xargs sed -i "s|/home/user|$HOME|g"`.
+
+  Hyprland and mako read the pywal16 colors when they load their config, so after changing the wallpaper run `hyprctl reload` and `makoctl reload`.
 </details>
 
 <div align="center">
