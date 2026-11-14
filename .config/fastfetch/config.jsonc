@@ -22,21 +22,21 @@
         },
         {
             "type": "cpu",
-            "key": "  ├",
+            "key": "  ├ CPU",
             "keyColor": "green",
             "format": "{name} - {temperature}",
             "temp": true
         },
         {
             "type": "gpu",
-            "key": "  ├󰍛",
+            "key": "  ├󰍛 GPU",
             "keyColor": "green",
             "format": "{name} - {temperature}",
             "temp": true
         },
         {
             "type": "memory",
-            "key": "  ├󰍛",
+            "key": "  ├󰍛 RAM",
             "keyColor": "green"
         },
         {
@@ -52,28 +52,28 @@
         },
         {
             "type": "kernel",
-            "key": "  ├",
+            "key": "  ├ Kernel",
             "keyColor": "yellow"
         },
         {
             "type": "command",
-            "key": "  ├󰆧",
+            "key": "  ├󰆧 Mesa",
             "keyColor": "yellow",
             "text": "pacman -Q mesa | awk '{print $2}' | sed 's/^[0-9]*://; s/-[0-9]*$//'"
         },
         {
             "type": "bios",
-            "key": "  ├",
+            "key": "  ├ Bios",
             "keyColor": "yellow"
         },
         {
             "type": "packages",
-            "key": "  ├󰏖",
+            "key": "  ├󰏖 Packages",
             "keyColor": "yellow"
         },
         {
             "type": "shell",
-            "key": "  └",
+            "key": "  └ Shell",
             "keyColor": "yellow"
         },
         "break",
