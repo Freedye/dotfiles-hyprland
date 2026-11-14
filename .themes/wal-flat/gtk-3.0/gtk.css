@@ -1,0 +1,929 @@
+/* Flat theme that follows the live pywal palette, same look as the quickshell bar.
+   bg = @background, fg = @foreground, accent = @color6, dim = @color8, warm = @color5 */
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained-dark.css");
+@import url("file:///home/freedye/.cache/wal/colors-waybar.css");
+
+@define-color theme_bg_color @background;
+@define-color theme_fg_color @foreground;
+@define-color theme_base_color @background;
+@define-color theme_text_color @foreground;
+@define-color theme_selected_bg_color @color8;
+@define-color theme_selected_fg_color @foreground;
+@define-color theme_unfocused_bg_color @background;
+@define-color theme_unfocused_fg_color @foreground;
+@define-color theme_unfocused_base_color @background;
+@define-color theme_unfocused_text_color @foreground;
+@define-color theme_unfocused_selected_bg_color @color8;
+@define-color theme_unfocused_selected_fg_color @foreground;
+@define-color insensitive_bg_color @background;
+@define-color insensitive_base_color @background;
+@define-color insensitive_fg_color alpha(@foreground, 0.45);
+@define-color content_view_bg @background;
+@define-color text_view_bg @background;
+@define-color borders alpha(@color8, 0.55);
+@define-color unfocused_borders alpha(@color8, 0.4);
+@define-color warning_color @color5;
+@define-color error_color #eb4d4b;
+
+* {
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+    outline-style: none;
+}
+
+window, .background, dialog, .view, iconview, treeview, textview text {
+    background-color: @background;
+    color: @foreground;
+}
+
+/* bars: flat, no gradients */
+menubar, toolbar, statusbar, headerbar, .titlebar, actionbar, notebook > header {
+    background-image: none;
+    background-color: @background;
+    color: @foreground;
+    border: none;
+}
+
+/* buttons: transparent, dim fill on hover, accent underline when active (like the workspaces) */
+button, toolbutton > button, menubar > menuitem {
+    background-image: none;
+    background-color: transparent;
+    color: @foreground;
+    border: none;
+    padding: 4px 8px;
+}
+button:hover, toolbutton > button:hover, menubar > menuitem:hover {
+    background-color: @color8;
+    color: @foreground;
+}
+button:checked, button:active, toolbutton > button:checked,
+menubar > menuitem:checked, notebook > header > tabs > tab:checked {
+    background-color: @color8;
+    box-shadow: inset 0 -3px @color6;
+}
+button:disabled { color: alpha(@foreground, 0.45); }
+button.suggested-action, button.destructive-action { background-color: @color8; }
+
+/* inputs */
+entry, spinbutton, combobox button {
+    background-image: none;
+    background-color: mix(@background, @foreground, 0.09);
+    color: @foreground;
+    border: none;
+    box-shadow: inset 0 -2px @color8;
+}
+entry:focus, spinbutton:focus { box-shadow: inset 0 -2px @color6; }
+entry selection, textview text selection { background-color: @color6; color: @background; }
+
+/* lists, icon view, side pane: selection = dim fill with a thin accent edge */
+treeview.view, iconview.view, .view {
+    background-color: @background;
+    color: @foreground;
+}
+treeview.view:hover, row:hover { background-color: alpha(@color8, 0.5); }
+treeview.view:selected, iconview.view:selected, .view:selected, row:selected,
+iconview:selected, treeview:selected {
+    background-color: @color8;
+    color: @foreground;
+    box-shadow: inset 3px 0 @color6;
+}
+treeview header button { background-color: @background; box-shadow: inset 0 -1px alpha(@color8, 0.5); }
+.rubberband, rubberband { background-color: alpha(@color6, 0.25); border: 1px solid @color6; }
+
+/* menus, popovers, tooltips */
+menu, .menu, popover, popover.background, .popup, tooltip, tooltip.background {
+    background-image: none;
+    background-color: @background;
+    color: @foreground;
+    border: 1px solid alpha(@color8, 0.55);
+}
+menu menuitem, .menu menuitem { background-color: transparent; padding: 5px 10px; }
+menu menuitem:hover, .menu menuitem:hover {
+    background-color: @color8;
+    color: @foreground;
+    box-shadow: inset 3px 0 @color6;
+}
+menu separator, separator { background-color: alpha(@color8, 0.5); min-height: 1px; min-width: 1px; }
+
+/* scrollbars: thin, no trough */
+scrollbar, scrollbar trough { background-color: transparent; border: none; }
+scrollbar slider { background-color: @color8; min-width: 6px; min-height: 6px; border: none; }
+scrollbar slider:hover { background-color: @color6; }
+
+paned > separator { background-color: alpha(@color8, 0.5); }
+progressbar progress { background-color: @color6; }
+progressbar trough { background-color: alpha(@color8, 0.4); }
+
+/* window without focus (:backdrop): keep exactly the same colors instead of Adwaita's dimmed ones */
+*:backdrop { -gtk-icon-effect: none; }
+window:backdrop, dialog:backdrop, .background:backdrop, .view:backdrop, iconview:backdrop,
+treeview:backdrop, textview text:backdrop {
+    background-color: @background;
+    color: @foreground;
+}
+menubar:backdrop, toolbar:backdrop, statusbar:backdrop, headerbar:backdrop, .titlebar:backdrop,
+actionbar:backdrop, notebook > header:backdrop {
+    background-image: none;
+    background-color: @background;
+    color: @foreground;
+}
+button:backdrop, toolbutton > button:backdrop, menubar > menuitem:backdrop {
+    background-image: none;
+    background-color: transparent;
+    color: @foreground;
+}
+button:checked:backdrop, button:active:backdrop, toolbutton > button:checked:backdrop,
+notebook > header > tabs > tab:checked:backdrop {
+    background-color: @color8;
+    box-shadow: inset 0 -3px @color6;
+}
+button:disabled:backdrop { color: alpha(@foreground, 0.45); }
+entry:backdrop, spinbutton:backdrop, combobox button:backdrop {
+    background-image: none;
+    background-color: mix(@background, @foreground, 0.09);
+    color: @foreground;
+    box-shadow: inset 0 -2px @color8;
+}
+treeview.view:selected:backdrop, iconview.view:selected:backdrop, .view:selected:backdrop,
+row:selected:backdrop, iconview:selected:backdrop, treeview:selected:backdrop {
+    background-color: @color8;
+    color: @foreground;
+    box-shadow: inset 3px 0 @color6;
+}
+treeview header button:backdrop { background-color: @background; box-shadow: inset 0 -1px alpha(@color8, 0.5); }
+label:backdrop, image:backdrop { color: @foreground; }
+label:disabled:backdrop { color: alpha(@foreground, 0.45); }
+scrollbar slider:backdrop { background-color: @color8; }
+
+/* hidden files (pcmanfm draws them as insensitive): keep them dimmed with and without focus */
+*:disabled, *:disabled:backdrop { -gtk-icon-effect: dim; }
+iconview:disabled, iconview:disabled:backdrop, iconview text:disabled, iconview text:disabled:backdrop,
+.view:disabled, .view:disabled:backdrop, .view text:disabled, .view text:disabled:backdrop,
+treeview.view:disabled, treeview.view:disabled:backdrop {
+    color: @insensitive_fg_color;
+}
+
+/* dialogs (e.g. delete confirmation): same flat look, title bar in the window color, square corners */
+messagedialog .titlebar, :not(headerbar).titlebar, window.csd > :not(headerbar).titlebar,
+messagedialog .titlebar:backdrop, :not(headerbar).titlebar:backdrop,
+.background .titlebar, .background .titlebar:backdrop {
+    background-image: none;
+    background-color: @background;
+    color: @foreground;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: none;
+}
+messagedialog.csd decoration, window.csd decoration, .popup.csd decoration, decoration {
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+messagedialog.csd.background, .csd.background {
+    border-radius: 0;
+}
+messagedialog.csd .dialog-action-area button,
+messagedialog.csd .dialog-action-area button:first-child,
+messagedialog.csd .dialog-action-area button:last-child {
+    -gtk-outline-top-left-radius: 0;
+    -gtk-outline-top-right-radius: 0;
+    -gtk-outline-bottom-left-radius: 0;
+    -gtk-outline-bottom-right-radius: 0;
+    border-radius: 0;
+    border: none;
+    background-image: none;
+}
+messagedialog.csd .dialog-action-area button:hover { background-color: @color8; }
+messagedialog .dialog-action-area, messagedialog .dialog-vbox { background-color: @background; }
+
+/* ---- full widget coverage: explicit colors in every state (Adwaita hard-codes its own grays/blues) ---- */
+@define-color link_color @color6;
+@define-color link_visited_color @color5;
+window:not(.zz):not(.zy) button,
+dialog:not(.zz):not(.zy) button,
+messagedialog:not(.zz):not(.zy) button,
+window:not(.zz):not(.zy) button:link,
+dialog:not(.zz):not(.zy) button:link,
+messagedialog:not(.zz):not(.zy) button:link,
+window:not(.zz):not(.zy) button:visited,
+dialog:not(.zz):not(.zy) button:visited,
+messagedialog:not(.zz):not(.zy) button:visited {
+    background-image:none;
+    background-color:mix(@background, @foreground, 0.09);
+    color:@foreground;
+    border:none;
+    box-shadow:none;
+    text-shadow:none;
+    border-radius:0;
+}
+window:not(.zz):not(.zy) toolbar button,
+dialog:not(.zz):not(.zy) toolbar button,
+messagedialog:not(.zz):not(.zy) toolbar button,
+window:not(.zz):not(.zy) button.flat,
+dialog:not(.zz):not(.zy) button.flat,
+messagedialog:not(.zz):not(.zy) button.flat,
+window:not(.zz):not(.zy) headerbar button,
+dialog:not(.zz):not(.zy) headerbar button,
+messagedialog:not(.zz):not(.zy) headerbar button,
+window:not(.zz):not(.zy) .titlebar button,
+dialog:not(.zz):not(.zy) .titlebar button,
+messagedialog:not(.zz):not(.zy) .titlebar button,
+window:not(.zz):not(.zy) menubar button,
+dialog:not(.zz):not(.zy) menubar button,
+messagedialog:not(.zz):not(.zy) menubar button,
+window:not(.zz):not(.zy) treeview header button,
+dialog:not(.zz):not(.zy) treeview header button,
+messagedialog:not(.zz):not(.zy) treeview header button,
+window:not(.zz):not(.zy) notebook > header button,
+dialog:not(.zz):not(.zy) notebook > header button,
+messagedialog:not(.zz):not(.zy) notebook > header button,
+window:not(.zz):not(.zy) actionbar button,
+dialog:not(.zz):not(.zy) actionbar button,
+messagedialog:not(.zz):not(.zy) actionbar button,
+window:not(.zz):not(.zy) popover button.flat,
+dialog:not(.zz):not(.zy) popover button.flat,
+messagedialog:not(.zz):not(.zy) popover button.flat {
+    background-image:none;
+    background-color:transparent;
+    color:@foreground;
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) button:hover,
+dialog:not(.zz):not(.zy) button:hover,
+messagedialog:not(.zz):not(.zy) button:hover,
+window:not(.zz):not(.zy) toolbar button:hover,
+dialog:not(.zz):not(.zy) toolbar button:hover,
+messagedialog:not(.zz):not(.zy) toolbar button:hover,
+window:not(.zz):not(.zy) button.flat:hover,
+dialog:not(.zz):not(.zy) button.flat:hover,
+messagedialog:not(.zz):not(.zy) button.flat:hover,
+window:not(.zz):not(.zy) headerbar button:hover,
+dialog:not(.zz):not(.zy) headerbar button:hover,
+messagedialog:not(.zz):not(.zy) headerbar button:hover,
+window:not(.zz):not(.zy) button:hover:not(:active):not(:checked),
+dialog:not(.zz):not(.zy) button:hover:not(:active):not(:checked),
+messagedialog:not(.zz):not(.zy) button:hover:not(:active):not(:checked) {
+    background-image:none;
+    background-color:@color8;
+    color:@foreground;
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) button:active,
+dialog:not(.zz):not(.zy) button:active,
+messagedialog:not(.zz):not(.zy) button:active,
+window:not(.zz):not(.zy) button:checked,
+dialog:not(.zz):not(.zy) button:checked,
+messagedialog:not(.zz):not(.zy) button:checked,
+window:not(.zz):not(.zy) button:active:hover,
+dialog:not(.zz):not(.zy) button:active:hover,
+messagedialog:not(.zz):not(.zy) button:active:hover,
+window:not(.zz):not(.zy) button:checked:hover,
+dialog:not(.zz):not(.zy) button:checked:hover,
+messagedialog:not(.zz):not(.zy) button:checked:hover,
+window:not(.zz):not(.zy) toolbar button:active,
+dialog:not(.zz):not(.zy) toolbar button:active,
+messagedialog:not(.zz):not(.zy) toolbar button:active,
+window:not(.zz):not(.zy) toolbar button:checked,
+dialog:not(.zz):not(.zy) toolbar button:checked,
+messagedialog:not(.zz):not(.zy) toolbar button:checked,
+window:not(.zz):not(.zy) button.flat:active,
+dialog:not(.zz):not(.zy) button.flat:active,
+messagedialog:not(.zz):not(.zy) button.flat:active,
+window:not(.zz):not(.zy) button.flat:checked,
+dialog:not(.zz):not(.zy) button.flat:checked,
+messagedialog:not(.zz):not(.zy) button.flat:checked,
+window:not(.zz):not(.zy) toolbar button:active:hover,
+dialog:not(.zz):not(.zy) toolbar button:active:hover,
+messagedialog:not(.zz):not(.zy) toolbar button:active:hover,
+window:not(.zz):not(.zy) toolbar button:checked:hover,
+dialog:not(.zz):not(.zy) toolbar button:checked:hover,
+messagedialog:not(.zz):not(.zy) toolbar button:checked:hover {
+    background-image:none;
+    background-color:@color8;
+    color:@foreground;
+    box-shadow: inset 0 -3px @color6;
+}
+window:not(.zz):not(.zy) button:disabled,
+dialog:not(.zz):not(.zy) button:disabled,
+messagedialog:not(.zz):not(.zy) button:disabled,
+window:not(.zz):not(.zy) button:disabled:backdrop,
+dialog:not(.zz):not(.zy) button:disabled:backdrop,
+messagedialog:not(.zz):not(.zy) button:disabled:backdrop,
+window:not(.zz):not(.zy) toolbar button:disabled,
+dialog:not(.zz):not(.zy) toolbar button:disabled,
+messagedialog:not(.zz):not(.zy) toolbar button:disabled {
+    background-image:none;
+    background-color:transparent;
+    color:alpha(@foreground, 0.45);
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) button.suggested-action,
+dialog:not(.zz):not(.zy) button.suggested-action,
+messagedialog:not(.zz):not(.zy) button.suggested-action,
+window:not(.zz):not(.zy) button.suggested-action:backdrop,
+dialog:not(.zz):not(.zy) button.suggested-action:backdrop,
+messagedialog:not(.zz):not(.zy) button.suggested-action:backdrop {
+    background-image:none;
+    background-color:@color6;
+    color:@background;
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) button.suggested-action:hover,
+dialog:not(.zz):not(.zy) button.suggested-action:hover,
+messagedialog:not(.zz):not(.zy) button.suggested-action:hover {
+    background-image:none;
+    background-color:mix(@color6, @foreground, 0.2);
+    color:@background;
+}
+window:not(.zz):not(.zy) button.destructive-action,
+dialog:not(.zz):not(.zy) button.destructive-action,
+messagedialog:not(.zz):not(.zy) button.destructive-action,
+window:not(.zz):not(.zy) button.destructive-action:backdrop,
+dialog:not(.zz):not(.zy) button.destructive-action:backdrop,
+messagedialog:not(.zz):not(.zy) button.destructive-action:backdrop {
+    background-image:none;
+    background-color:#eb4d4b;
+    color:#ffffff;
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) button.destructive-action:hover,
+dialog:not(.zz):not(.zy) button.destructive-action:hover,
+messagedialog:not(.zz):not(.zy) button.destructive-action:hover {
+    background-image:none;
+    background-color:mix(#eb4d4b, @foreground, 0.2);
+    color:#ffffff;
+}
+window:not(.zz):not(.zy) entry,
+dialog:not(.zz):not(.zy) entry,
+messagedialog:not(.zz):not(.zy) entry,
+window:not(.zz):not(.zy) entry:backdrop,
+dialog:not(.zz):not(.zy) entry:backdrop,
+messagedialog:not(.zz):not(.zy) entry:backdrop,
+window:not(.zz):not(.zy) spinbutton:not(.vertical),
+dialog:not(.zz):not(.zy) spinbutton:not(.vertical),
+messagedialog:not(.zz):not(.zy) spinbutton:not(.vertical),
+window:not(.zz):not(.zy) spinbutton:not(.vertical):backdrop,
+dialog:not(.zz):not(.zy) spinbutton:not(.vertical):backdrop,
+messagedialog:not(.zz):not(.zy) spinbutton:not(.vertical):backdrop {
+    background-image:none;
+    background-color:mix(@background, @foreground, 0.09);
+    color:@foreground;
+    border:none;
+    border-radius:0;
+    box-shadow: inset 0 -2px @color8;
+}
+window:not(.zz):not(.zy) entry:focus,
+dialog:not(.zz):not(.zy) entry:focus,
+messagedialog:not(.zz):not(.zy) entry:focus,
+window:not(.zz):not(.zy) spinbutton:not(.vertical):focus-within,
+dialog:not(.zz):not(.zy) spinbutton:not(.vertical):focus-within,
+messagedialog:not(.zz):not(.zy) spinbutton:not(.vertical):focus-within {
+    background-image:none;
+    background-color:mix(@background, @foreground, 0.09);
+    box-shadow: inset 0 -2px @color6;
+}
+window:not(.zz):not(.zy) entry:disabled,
+dialog:not(.zz):not(.zy) entry:disabled,
+messagedialog:not(.zz):not(.zy) entry:disabled,
+window:not(.zz):not(.zy) spinbutton:disabled,
+dialog:not(.zz):not(.zy) spinbutton:disabled,
+messagedialog:not(.zz):not(.zy) spinbutton:disabled {
+    color:alpha(@foreground, 0.45);
+    box-shadow: inset 0 -2px alpha(@color8, 0.4);
+}
+window:not(.zz):not(.zy) spinbutton:not(.vertical) entry,
+dialog:not(.zz):not(.zy) spinbutton:not(.vertical) entry,
+messagedialog:not(.zz):not(.zy) spinbutton:not(.vertical) entry,
+window:not(.zz):not(.zy) spinbutton:not(.vertical) entry:focus,
+dialog:not(.zz):not(.zy) spinbutton:not(.vertical) entry:focus,
+messagedialog:not(.zz):not(.zy) spinbutton:not(.vertical) entry:focus {
+    background-color:transparent;
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) spinbutton button,
+dialog:not(.zz):not(.zy) spinbutton button,
+messagedialog:not(.zz):not(.zy) spinbutton button,
+window:not(.zz):not(.zy) spinbutton:not(.vertical) button,
+dialog:not(.zz):not(.zy) spinbutton:not(.vertical) button,
+messagedialog:not(.zz):not(.zy) spinbutton:not(.vertical) button {
+    background-image:none;
+    background-color:transparent;
+    border:none;
+    box-shadow:none;
+    color:@foreground;
+}
+window:not(.zz):not(.zy) spinbutton button:hover,
+dialog:not(.zz):not(.zy) spinbutton button:hover,
+messagedialog:not(.zz):not(.zy) spinbutton button:hover {
+    background-color:@color8;
+}
+window:not(.zz):not(.zy) combobox button,
+dialog:not(.zz):not(.zy) combobox button,
+messagedialog:not(.zz):not(.zy) combobox button,
+window:not(.zz):not(.zy) combobox button:backdrop,
+dialog:not(.zz):not(.zy) combobox button:backdrop,
+messagedialog:not(.zz):not(.zy) combobox button:backdrop {
+    background-image:none;
+    background-color:mix(@background, @foreground, 0.09);
+    box-shadow: inset 0 -2px @color8;
+}
+window:not(.zz):not(.zy) combobox button:hover,
+dialog:not(.zz):not(.zy) combobox button:hover,
+messagedialog:not(.zz):not(.zy) combobox button:hover {
+    background-color:@color8;
+}
+window:not(.zz):not(.zy) check,
+dialog:not(.zz):not(.zy) check,
+messagedialog:not(.zz):not(.zy) check,
+window:not(.zz):not(.zy) radio,
+dialog:not(.zz):not(.zy) radio,
+messagedialog:not(.zz):not(.zy) radio,
+window:not(.zz):not(.zy) check:backdrop,
+dialog:not(.zz):not(.zy) check:backdrop,
+messagedialog:not(.zz):not(.zy) check:backdrop,
+window:not(.zz):not(.zy) radio:backdrop,
+dialog:not(.zz):not(.zy) radio:backdrop,
+messagedialog:not(.zz):not(.zy) radio:backdrop {
+    background-image:none;
+    background-color:mix(@background, @foreground, 0.09);
+    color:@background;
+    border:1px solid @color8;
+    box-shadow:none;
+    -gtk-icon-shadow:none;
+}
+window:not(.zz):not(.zy) check:hover,
+dialog:not(.zz):not(.zy) check:hover,
+messagedialog:not(.zz):not(.zy) check:hover,
+window:not(.zz):not(.zy) radio:hover,
+dialog:not(.zz):not(.zy) radio:hover,
+messagedialog:not(.zz):not(.zy) radio:hover {
+    background-image:none;
+    border-color:@color6;
+}
+window:not(.zz):not(.zy) check:checked,
+dialog:not(.zz):not(.zy) check:checked,
+messagedialog:not(.zz):not(.zy) check:checked,
+window:not(.zz):not(.zy) radio:checked,
+dialog:not(.zz):not(.zy) radio:checked,
+messagedialog:not(.zz):not(.zy) radio:checked,
+window:not(.zz):not(.zy) check:indeterminate,
+dialog:not(.zz):not(.zy) check:indeterminate,
+messagedialog:not(.zz):not(.zy) check:indeterminate,
+window:not(.zz):not(.zy) radio:indeterminate,
+dialog:not(.zz):not(.zy) radio:indeterminate,
+messagedialog:not(.zz):not(.zy) radio:indeterminate,
+window:not(.zz):not(.zy) check:checked:backdrop,
+dialog:not(.zz):not(.zy) check:checked:backdrop,
+messagedialog:not(.zz):not(.zy) check:checked:backdrop,
+window:not(.zz):not(.zy) radio:checked:backdrop,
+dialog:not(.zz):not(.zy) radio:checked:backdrop,
+messagedialog:not(.zz):not(.zy) radio:checked:backdrop {
+    background-image:none;
+    background-color:@color6;
+    border-color:@color6;
+    color:@background;
+}
+window:not(.zz):not(.zy) check:disabled,
+dialog:not(.zz):not(.zy) check:disabled,
+messagedialog:not(.zz):not(.zy) check:disabled,
+window:not(.zz):not(.zy) radio:disabled,
+dialog:not(.zz):not(.zy) radio:disabled,
+messagedialog:not(.zz):not(.zy) radio:disabled {
+    background-image:none;
+    background-color:transparent;
+    border-color:alpha(@color8, 0.5);
+    color:alpha(@foreground, 0.45);
+}
+window:not(.zz):not(.zy) switch,
+dialog:not(.zz):not(.zy) switch,
+messagedialog:not(.zz):not(.zy) switch,
+window:not(.zz):not(.zy) switch:backdrop,
+dialog:not(.zz):not(.zy) switch:backdrop,
+messagedialog:not(.zz):not(.zy) switch:backdrop {
+    background-image:none;
+    background-color:mix(@background, @foreground, 0.09);
+    color:@foreground;
+    border:1px solid @color8;
+    box-shadow:none;
+    text-shadow:none;
+    border-radius:0;
+}
+window:not(.zz):not(.zy) switch:checked,
+dialog:not(.zz):not(.zy) switch:checked,
+messagedialog:not(.zz):not(.zy) switch:checked,
+window:not(.zz):not(.zy) switch:checked:backdrop,
+dialog:not(.zz):not(.zy) switch:checked:backdrop,
+messagedialog:not(.zz):not(.zy) switch:checked:backdrop {
+    background-image:none;
+    background-color:@color6;
+    color:@background;
+    border-color:@color6;
+    text-shadow:none;
+}
+window:not(.zz):not(.zy) switch slider,
+dialog:not(.zz):not(.zy) switch slider,
+messagedialog:not(.zz):not(.zy) switch slider,
+window:not(.zz):not(.zy) switch:checked slider,
+dialog:not(.zz):not(.zy) switch:checked slider,
+messagedialog:not(.zz):not(.zy) switch:checked slider,
+window:not(.zz):not(.zy) switch slider:backdrop,
+dialog:not(.zz):not(.zy) switch slider:backdrop,
+messagedialog:not(.zz):not(.zy) switch slider:backdrop,
+window:not(.zz):not(.zy) switch:disabled slider,
+dialog:not(.zz):not(.zy) switch:disabled slider,
+messagedialog:not(.zz):not(.zy) switch:disabled slider {
+    background-image:none;
+    background-color:@foreground;
+    border:none;
+    box-shadow:none;
+    border-radius:0;
+}
+window:not(.zz):not(.zy) scale trough,
+dialog:not(.zz):not(.zy) scale trough,
+messagedialog:not(.zz):not(.zy) scale trough,
+window:not(.zz):not(.zy) scale trough:backdrop,
+dialog:not(.zz):not(.zy) scale trough:backdrop,
+messagedialog:not(.zz):not(.zy) scale trough:backdrop {
+    background-image:none;
+    background-color:alpha(@color8, 0.5);
+    border:none;
+    box-shadow:none;
+    min-height:4px;
+    min-width:4px;
+}
+window:not(.zz):not(.zy) scale highlight,
+dialog:not(.zz):not(.zy) scale highlight,
+messagedialog:not(.zz):not(.zy) scale highlight,
+window:not(.zz):not(.zy) scale highlight:backdrop,
+dialog:not(.zz):not(.zy) scale highlight:backdrop,
+messagedialog:not(.zz):not(.zy) scale highlight:backdrop {
+    background-image:none;
+    background-color:@color6;
+    border:none;
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) scale slider,
+dialog:not(.zz):not(.zy) scale slider,
+messagedialog:not(.zz):not(.zy) scale slider,
+window:not(.zz):not(.zy) scale slider:hover,
+dialog:not(.zz):not(.zy) scale slider:hover,
+messagedialog:not(.zz):not(.zy) scale slider:hover,
+window:not(.zz):not(.zy) scale slider:active,
+dialog:not(.zz):not(.zy) scale slider:active,
+messagedialog:not(.zz):not(.zy) scale slider:active,
+window:not(.zz):not(.zy) scale slider:backdrop,
+dialog:not(.zz):not(.zy) scale slider:backdrop,
+messagedialog:not(.zz):not(.zy) scale slider:backdrop {
+    background-image:none;
+    background-color:@foreground;
+    border:none;
+    box-shadow:none;
+    border-radius:0;
+}
+window:not(.zz):not(.zy) progressbar trough,
+dialog:not(.zz):not(.zy) progressbar trough,
+messagedialog:not(.zz):not(.zy) progressbar trough,
+window:not(.zz):not(.zy) levelbar trough,
+dialog:not(.zz):not(.zy) levelbar trough,
+messagedialog:not(.zz):not(.zy) levelbar trough,
+window:not(.zz):not(.zy) levelbar block.empty,
+dialog:not(.zz):not(.zy) levelbar block.empty,
+messagedialog:not(.zz):not(.zy) levelbar block.empty {
+    background-image:none;
+    background-color:alpha(@color8, 0.4);
+    border:none;
+    box-shadow:none;
+    min-height:4px;
+}
+window:not(.zz):not(.zy) progressbar progress,
+dialog:not(.zz):not(.zy) progressbar progress,
+messagedialog:not(.zz):not(.zy) progressbar progress,
+window:not(.zz):not(.zy) levelbar block.filled,
+dialog:not(.zz):not(.zy) levelbar block.filled,
+messagedialog:not(.zz):not(.zy) levelbar block.filled,
+window:not(.zz):not(.zy) levelbar block.filled.low,
+dialog:not(.zz):not(.zy) levelbar block.filled.low,
+messagedialog:not(.zz):not(.zy) levelbar block.filled.low,
+window:not(.zz):not(.zy) levelbar block.filled.high,
+dialog:not(.zz):not(.zy) levelbar block.filled.high,
+messagedialog:not(.zz):not(.zy) levelbar block.filled.high,
+window:not(.zz):not(.zy) levelbar block.filled.full,
+dialog:not(.zz):not(.zy) levelbar block.filled.full,
+messagedialog:not(.zz):not(.zy) levelbar block.filled.full {
+    background-image:none;
+    background-color:@color6;
+    border:none;
+    box-shadow:none;
+    min-height:4px;
+}
+window:not(.zz):not(.zy) notebook,
+dialog:not(.zz):not(.zy) notebook,
+messagedialog:not(.zz):not(.zy) notebook,
+window:not(.zz):not(.zy) notebook > header,
+dialog:not(.zz):not(.zy) notebook > header,
+messagedialog:not(.zz):not(.zy) notebook > header,
+window:not(.zz):not(.zy) notebook > header.top,
+dialog:not(.zz):not(.zy) notebook > header.top,
+messagedialog:not(.zz):not(.zy) notebook > header.top,
+window:not(.zz):not(.zy) notebook > header.bottom,
+dialog:not(.zz):not(.zy) notebook > header.bottom,
+messagedialog:not(.zz):not(.zy) notebook > header.bottom,
+window:not(.zz):not(.zy) notebook > header.left,
+dialog:not(.zz):not(.zy) notebook > header.left,
+messagedialog:not(.zz):not(.zy) notebook > header.left,
+window:not(.zz):not(.zy) notebook > header.right,
+dialog:not(.zz):not(.zy) notebook > header.right,
+messagedialog:not(.zz):not(.zy) notebook > header.right {
+    background-image:none;
+    background-color:@background;
+    border-color:alpha(@color8, 0.5);
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) notebook > stack:not(:only-child),
+dialog:not(.zz):not(.zy) notebook > stack:not(:only-child),
+messagedialog:not(.zz):not(.zy) notebook > stack:not(:only-child),
+window:not(.zz):not(.zy) notebook > stack,
+dialog:not(.zz):not(.zy) notebook > stack,
+messagedialog:not(.zz):not(.zy) notebook > stack {
+    background-color:@background;
+    background-image:none;
+}
+window:not(.zz):not(.zy) notebook > header > tabs > tab,
+dialog:not(.zz):not(.zy) notebook > header > tabs > tab,
+messagedialog:not(.zz):not(.zy) notebook > header > tabs > tab,
+window:not(.zz):not(.zy) notebook > header > tabs > tab:backdrop,
+dialog:not(.zz):not(.zy) notebook > header > tabs > tab:backdrop,
+messagedialog:not(.zz):not(.zy) notebook > header > tabs > tab:backdrop {
+    background-image:none;
+    background-color:transparent;
+    color:alpha(@foreground, 0.7);
+    border:none;
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) notebook > header > tabs > tab:hover,
+dialog:not(.zz):not(.zy) notebook > header > tabs > tab:hover,
+messagedialog:not(.zz):not(.zy) notebook > header > tabs > tab:hover {
+    background-color:alpha(@color8, 0.5);
+    color:@foreground;
+}
+window:not(.zz):not(.zy) notebook > header > tabs > tab:checked,
+dialog:not(.zz):not(.zy) notebook > header > tabs > tab:checked,
+messagedialog:not(.zz):not(.zy) notebook > header > tabs > tab:checked,
+window:not(.zz):not(.zy) notebook > header > tabs > tab:checked:backdrop,
+dialog:not(.zz):not(.zy) notebook > header > tabs > tab:checked:backdrop,
+messagedialog:not(.zz):not(.zy) notebook > header > tabs > tab:checked:backdrop {
+    background-image:none;
+    background-color:@color8;
+    color:@foreground;
+    box-shadow: inset 0 -3px @color6;
+}
+window:not(.zz):not(.zy) list,
+dialog:not(.zz):not(.zy) list,
+messagedialog:not(.zz):not(.zy) list,
+window:not(.zz):not(.zy) list:backdrop,
+dialog:not(.zz):not(.zy) list:backdrop,
+messagedialog:not(.zz):not(.zy) list:backdrop,
+window:not(.zz):not(.zy) listbox,
+dialog:not(.zz):not(.zy) listbox,
+messagedialog:not(.zz):not(.zy) listbox {
+    background-color:@background;
+    background-image:none;
+    color:@foreground;
+    border-color:alpha(@color8, 0.5);
+}
+window:not(.zz):not(.zy) list row,
+dialog:not(.zz):not(.zy) list row,
+messagedialog:not(.zz):not(.zy) list row,
+window:not(.zz):not(.zy) list row:backdrop,
+dialog:not(.zz):not(.zy) list row:backdrop,
+messagedialog:not(.zz):not(.zy) list row:backdrop {
+    background-color:transparent;
+    background-image:none;
+    color:@foreground;
+}
+window:not(.zz):not(.zy) list row:hover,
+dialog:not(.zz):not(.zy) list row:hover,
+messagedialog:not(.zz):not(.zy) list row:hover {
+    background-color:alpha(@color8, 0.5);
+}
+window:not(.zz):not(.zy) list row:selected,
+dialog:not(.zz):not(.zy) list row:selected,
+messagedialog:not(.zz):not(.zy) list row:selected,
+window:not(.zz):not(.zy) list row:selected:backdrop,
+dialog:not(.zz):not(.zy) list row:selected:backdrop,
+messagedialog:not(.zz):not(.zy) list row:selected:backdrop,
+window:not(.zz):not(.zy) list row:selected:hover,
+dialog:not(.zz):not(.zy) list row:selected:hover,
+messagedialog:not(.zz):not(.zy) list row:selected:hover {
+    background-color:@color8;
+    color:@foreground;
+    box-shadow: inset 3px 0 @color6;
+}
+window:not(.zz):not(.zy) treeview header button,
+dialog:not(.zz):not(.zy) treeview header button,
+messagedialog:not(.zz):not(.zy) treeview header button,
+window:not(.zz):not(.zy) treeview header button:backdrop,
+dialog:not(.zz):not(.zy) treeview header button:backdrop,
+messagedialog:not(.zz):not(.zy) treeview header button:backdrop,
+window:not(.zz):not(.zy) treeview header button:hover,
+dialog:not(.zz):not(.zy) treeview header button:hover,
+messagedialog:not(.zz):not(.zy) treeview header button:hover,
+window:not(.zz):not(.zy) treeview header button:active,
+dialog:not(.zz):not(.zy) treeview header button:active,
+messagedialog:not(.zz):not(.zy) treeview header button:active {
+    background-image:none;
+    background-color:@background;
+    color:@foreground;
+    border:none;
+    box-shadow: inset 0 -1px alpha(@color8, 0.5);
+}
+window:not(.zz):not(.zy) treeview header button:hover,
+dialog:not(.zz):not(.zy) treeview header button:hover,
+messagedialog:not(.zz):not(.zy) treeview header button:hover {
+    background-color:mix(@background, @foreground, 0.09);
+}
+window:not(.zz):not(.zy) frame > border,
+dialog:not(.zz):not(.zy) frame > border,
+messagedialog:not(.zz):not(.zy) frame > border,
+window:not(.zz):not(.zy) scrolledwindow,
+dialog:not(.zz):not(.zy) scrolledwindow,
+messagedialog:not(.zz):not(.zy) scrolledwindow,
+window:not(.zz):not(.zy) scrolledwindow > viewport,
+dialog:not(.zz):not(.zy) scrolledwindow > viewport,
+messagedialog:not(.zz):not(.zy) scrolledwindow > viewport,
+window:not(.zz):not(.zy) scrolledwindow viewport.frame,
+dialog:not(.zz):not(.zy) scrolledwindow viewport.frame,
+messagedialog:not(.zz):not(.zy) scrolledwindow viewport.frame,
+window:not(.zz):not(.zy) .frame,
+dialog:not(.zz):not(.zy) .frame,
+messagedialog:not(.zz):not(.zy) .frame {
+    border-color:alpha(@color8, 0.5);
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) infobar,
+dialog:not(.zz):not(.zy) infobar,
+messagedialog:not(.zz):not(.zy) infobar,
+window:not(.zz):not(.zy) infobar:backdrop,
+dialog:not(.zz):not(.zy) infobar:backdrop,
+messagedialog:not(.zz):not(.zy) infobar:backdrop {
+    background-image:none;
+    background-color:mix(@background, @foreground, 0.09);
+    color:@foreground;
+    border:none;
+    box-shadow: inset 3px 0 @color8;
+    text-shadow:none;
+}
+window:not(.zz):not(.zy) infobar.warning,
+dialog:not(.zz):not(.zy) infobar.warning,
+messagedialog:not(.zz):not(.zy) infobar.warning {
+    background-color:mix(@background, @color5, 0.22);
+    box-shadow: inset 3px 0 @color5;
+}
+window:not(.zz):not(.zy) infobar.error,
+dialog:not(.zz):not(.zy) infobar.error,
+messagedialog:not(.zz):not(.zy) infobar.error {
+    background-color:mix(@background, #eb4d4b, 0.22);
+    box-shadow: inset 3px 0 #eb4d4b;
+}
+window:not(.zz):not(.zy) infobar.info,
+dialog:not(.zz):not(.zy) infobar.info,
+messagedialog:not(.zz):not(.zy) infobar.info,
+window:not(.zz):not(.zy) infobar.question,
+dialog:not(.zz):not(.zy) infobar.question,
+messagedialog:not(.zz):not(.zy) infobar.question {
+    background-color:mix(@background, @color6, 0.18);
+    box-shadow: inset 3px 0 @color6;
+}
+window:not(.zz):not(.zy) *:link,
+dialog:not(.zz):not(.zy) *:link,
+messagedialog:not(.zz):not(.zy) *:link,
+window:not(.zz):not(.zy) *:link:hover,
+dialog:not(.zz):not(.zy) *:link:hover,
+messagedialog:not(.zz):not(.zy) *:link:hover,
+window:not(.zz):not(.zy) *:link:active,
+dialog:not(.zz):not(.zy) *:link:active,
+messagedialog:not(.zz):not(.zy) *:link:active {
+    color:@color6;
+}
+window:not(.zz):not(.zy) *:visited,
+dialog:not(.zz):not(.zy) *:visited,
+messagedialog:not(.zz):not(.zy) *:visited,
+window:not(.zz):not(.zy) *:visited:hover,
+dialog:not(.zz):not(.zy) *:visited:hover,
+messagedialog:not(.zz):not(.zy) *:visited:hover {
+    color:@color5;
+}
+window:not(.zz):not(.zy) label:disabled,
+dialog:not(.zz):not(.zy) label:disabled,
+messagedialog:not(.zz):not(.zy) label:disabled,
+window:not(.zz):not(.zy) label:disabled:backdrop,
+dialog:not(.zz):not(.zy) label:disabled:backdrop,
+messagedialog:not(.zz):not(.zy) label:disabled:backdrop {
+    color:alpha(@foreground, 0.45);
+}
+window:not(.zz):not(.zy) tooltip,
+dialog:not(.zz):not(.zy) tooltip,
+messagedialog:not(.zz):not(.zy) tooltip,
+window:not(.zz):not(.zy) tooltip.background,
+dialog:not(.zz):not(.zy) tooltip.background,
+messagedialog:not(.zz):not(.zy) tooltip.background {
+    background-image:none;
+    background-color:@background;
+    color:@foreground;
+    border:1px solid alpha(@color8, 0.55);
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) popover,
+dialog:not(.zz):not(.zy) popover,
+messagedialog:not(.zz):not(.zy) popover,
+window:not(.zz):not(.zy) popover.background,
+dialog:not(.zz):not(.zy) popover.background,
+messagedialog:not(.zz):not(.zy) popover.background,
+window:not(.zz):not(.zy) menu,
+dialog:not(.zz):not(.zy) menu,
+messagedialog:not(.zz):not(.zy) menu,
+window:not(.zz):not(.zy) .menu,
+dialog:not(.zz):not(.zy) .menu,
+messagedialog:not(.zz):not(.zy) .menu,
+window:not(.zz):not(.zy) menu:backdrop,
+dialog:not(.zz):not(.zy) menu:backdrop,
+messagedialog:not(.zz):not(.zy) menu:backdrop {
+    background-image:none;
+    background-color:@background;
+    color:@foreground;
+    border:1px solid alpha(@color8, 0.55);
+    box-shadow:none;
+}
+window:not(.zz):not(.zy) menu menuitem:hover,
+dialog:not(.zz):not(.zy) menu menuitem:hover,
+messagedialog:not(.zz):not(.zy) menu menuitem:hover,
+window:not(.zz):not(.zy) .menu menuitem:hover,
+dialog:not(.zz):not(.zy) .menu menuitem:hover,
+messagedialog:not(.zz):not(.zy) .menu menuitem:hover,
+window:not(.zz):not(.zy) menubar > menuitem:hover,
+dialog:not(.zz):not(.zy) menubar > menuitem:hover,
+messagedialog:not(.zz):not(.zy) menubar > menuitem:hover,
+window:not(.zz):not(.zy) menu menuitem:active,
+dialog:not(.zz):not(.zy) menu menuitem:active,
+messagedialog:not(.zz):not(.zy) menu menuitem:active {
+    background-image:none;
+    background-color:@color8;
+    color:@foreground;
+    box-shadow: inset 3px 0 @color6;
+}
+window:not(.zz):not(.zy) menubar > menuitem:hover,
+dialog:not(.zz):not(.zy) menubar > menuitem:hover,
+messagedialog:not(.zz):not(.zy) menubar > menuitem:hover {
+    box-shadow:none;
+}
+
+/* link buttons draw their label through the button, so color the label too */
+window:not(.zz):not(.zy) button:link,
+dialog:not(.zz):not(.zy) button:link,
+messagedialog:not(.zz):not(.zy) button:link,
+window:not(.zz):not(.zy) button:link label,
+dialog:not(.zz):not(.zy) button:link label,
+messagedialog:not(.zz):not(.zy) button:link label,
+window:not(.zz):not(.zy) button:link:hover label,
+dialog:not(.zz):not(.zy) button:link:hover label,
+messagedialog:not(.zz):not(.zy) button:link:hover label,
+window:not(.zz):not(.zy) label:link,
+dialog:not(.zz):not(.zy) label:link,
+messagedialog:not(.zz):not(.zy) label:link,
+window:not(.zz):not(.zy) label:link:hover,
+dialog:not(.zz):not(.zy) label:link:hover,
+messagedialog:not(.zz):not(.zy) label:link:hover {
+    color: @color6;
+}
+window:not(.zz):not(.zy) button:visited label,
+dialog:not(.zz):not(.zy) button:visited label,
+messagedialog:not(.zz):not(.zy) button:visited label,
+window:not(.zz):not(.zy) label:visited,
+dialog:not(.zz):not(.zy) label:visited,
+messagedialog:not(.zz):not(.zy) label:visited { color: @color5; }
+
+/* labels inside colored buttons keep their contrast without focus too */
+window:not(.zz):not(.zy) button.suggested-action:backdrop label,
+dialog:not(.zz):not(.zy) button.suggested-action:backdrop label,
+messagedialog:not(.zz):not(.zy) button.suggested-action:backdrop label,
+window:not(.zz):not(.zy) button.suggested-action label,
+dialog:not(.zz):not(.zy) button.suggested-action label,
+messagedialog:not(.zz):not(.zy) button.suggested-action label,
+window:not(.zz):not(.zy) button.suggested-action:disabled label,
+dialog:not(.zz):not(.zy) button.suggested-action:disabled label,
+messagedialog:not(.zz):not(.zy) button.suggested-action:disabled label { color: @background; }
+window:not(.zz):not(.zy) button.destructive-action:backdrop label,
+dialog:not(.zz):not(.zy) button.destructive-action:backdrop label,
+messagedialog:not(.zz):not(.zy) button.destructive-action:backdrop label,
+window:not(.zz):not(.zy) button.destructive-action label,
+dialog:not(.zz):not(.zy) button.destructive-action label,
+messagedialog:not(.zz):not(.zy) button.destructive-action label { color: #ffffff; }
+
+/* dialogs (e.g. file transfer progress) float over pcmanfm: raise them like menus so they don't blend in */
+dialog.background, dialog.background:backdrop {
+    background-color: mix(@background, @foreground, 0.07);
+    border: 1px solid alpha(@color8, 0.9);
+}
+dialog progressbar trough, dialog progressbar progress { min-height: 6px; }

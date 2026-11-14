@@ -56,6 +56,7 @@
   - **[Maple Mono](https://github.com/subframe7536/maple-font)**: font used across kitty, mako, wofi and hyprlock
   - **[rose-pine-hyprcursor](https://github.com/ndom91/rose-pine-hyprcursor)**: cursor theme
   - **Adwaita GTK theme** (dark variant) and **qt6ct**: GTK/Qt theming
+  - **wal-flat**: flat GTK3 theme for pcmanfm that follows the live pywal16 palette (included under `.themes/wal-flat`)
   - **hyprpolkitagent**: polkit authentication agent
   - **[xembedsniproxy](https://github.com/Freedye/xembedsniproxy-standalone)**: XEmbed system tray proxy (installed at `/usr/local/bin`)
 
@@ -70,6 +71,7 @@
   ln -s "$PWD/.config/mako"       ~/.config/mako
   ln -s "$PWD/.config/wofi"       ~/.config/wofi
   ln -s "$PWD/.config/fastfetch"  ~/.config/fastfetch
+  ln -s "$PWD/.themes/wal-flat"   ~/.themes/wal-flat
   ln -s "$PWD/.zshrc"             ~/.zshrc
   ```
 

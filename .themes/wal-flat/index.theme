@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=wal-flat
+Comment=Flat GTK3 theme that follows the pywal palette, like the quickshell bar
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=wal-flat
