@@ -10,7 +10,8 @@
   color: @color7;
 
   /*Linear gradient background instead of standard background, because it makes cleaner border-radius cuts, issa bug :p*/
-  background-image: linear-gradient(to bottom, @color0 100%);
+  background-image: linear-gradient(to bottom, mix(@color0, @color7, 0.09) 100%);
+  border: 1px solid @color8;
 }
 
 #inner-box {
@@ -27,7 +28,7 @@
 }
 
 #entry:selected {
-  background: @color5;
+  background: @color1;
   color: @color7;
   font-weight: bold;
   outline: none;
