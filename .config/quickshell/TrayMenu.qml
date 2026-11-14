@@ -65,7 +65,22 @@ PopupWindow {
                 width: parent.width
                 height: 28
                 visible: root.stack.length > 0
-                color: backHover.hovered ? Theme.alpha(Theme.accent, 0.2) : "transparent"
+                color: backHover.hovered ? Theme.dim : "transparent"
+
+                Behavior on color {
+                    ColorAnimation { duration: 120 }
+                }
+
+                Rectangle {
+                    width: 3
+                    height: parent.height
+                    color: Theme.accent
+                    opacity: backHover.hovered ? 1 : 0
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 120 }
+                    }
+                }
 
                 Row {
                     anchors.verticalCenter: parent.verticalCenter
@@ -74,11 +89,10 @@ PopupWindow {
                     Icon {
                         text: Theme.ico.left
                         font.pixelSize: 11
-                        color: Theme.accent
+                        color: backHover.hovered ? Theme.accent : Theme.dim
                     }
                     Txt {
                         text: "Indietro"
-                        color: Theme.accent
                     }
                 }
                 HoverHandler { id: backHover }
@@ -113,7 +127,22 @@ PopupWindow {
                     Rectangle {
                         anchors.fill: parent
                         visible: !entry.modelData.isSeparator
-                        color: entryHover.hovered && entry.modelData.enabled ? Theme.alpha(Theme.accent, 0.2) : "transparent"
+                        color: entryHover.hovered && entry.modelData.enabled ? Theme.dim : "transparent"
+
+                        Behavior on color {
+                            ColorAnimation { duration: 120 }
+                        }
+
+                        Rectangle {
+                            width: 3
+                            height: parent.height
+                            color: Theme.accent
+                            opacity: entryHover.hovered && entry.modelData.enabled ? 1 : 0
+
+                            Behavior on opacity {
+                                NumberAnimation { duration: 120 }
+                            }
+                        }
 
                         Row {
                             anchors.verticalCenter: parent.verticalCenter
