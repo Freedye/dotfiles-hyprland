@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
@@ -128,6 +129,12 @@ PopupWindow {
                                     anchors.fill: parent
                                     visible: entry.modelData.icon !== ""
                                     source: entry.modelData.icon
+                                    layer.enabled: entry.modelData.icon.endsWith("-symbolic")
+                                    layer.effect: MultiEffect {
+                                        brightness: 1.0
+                                        colorization: 1.0
+                                        colorizationColor: entry.modelData.enabled ? Theme.fg : Theme.alpha(Theme.fg, 0.4)
+                                    }
                                 }
                                 Icon {
                                     anchors.centerIn: parent

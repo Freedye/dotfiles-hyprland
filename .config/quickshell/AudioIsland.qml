@@ -97,7 +97,7 @@ Island {
         width: 12
         horizontalAlignment: Text.AlignLeft
         text: root.glyph
-        color: root.muted ? Theme.alpha(Theme.fg, 0.45) : Theme.accent
+        color: root.muted ? Theme.alpha(Theme.fg, 0.45) : Theme.fg
     }
 
     overlay: [
