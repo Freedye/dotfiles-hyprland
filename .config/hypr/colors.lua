@@ -1,16 +1,26 @@
-color0 = "#0f1e25"
-color1 = "#483C64"
-color2 = "#634C65"
-color3 = "#BC5422"
-color4 = "#9B5E61"
-color5 = "#D17560"
-color6 = "#C79252"
-color7 = "#c3c6c8"
-color8 = "#5f6d74"
-color9 = "#483C64"
-color10= "#634C65"
-color11= "#BC5422"
-color12= "#9B5E61"
-color13= "#D17560"
-color14= "#C79252"
-color15= "#c3c6c8"
+-- Palette from pywal (~/.cache/wal/colors, one hex per line, color0..color15).
+-- The static values are only a fallback for when the cache is missing.
+local fallback = {
+    "#0f1e25", "#483C64", "#634C65", "#BC5422",
+    "#9B5E61", "#D17560", "#C79252", "#c3c6c8",
+    "#5f6d74", "#483C64", "#634C65", "#BC5422",
+    "#9B5E61", "#D17560", "#C79252", "#c3c6c8",
+}
+
+local palette = {}
+local f = io.open(os.getenv("HOME") .. "/.cache/wal/colors", "r")
+if f then
+    for line in f:lines() do
+        if line:match("^#%x%x%x%x%x%x$") then
+            palette[#palette + 1] = line
+        end
+    end
+    f:close()
+end
+if #palette < 16 then
+    palette = fallback
+end
+
+for i = 1, 16 do
+    _G["color" .. (i - 1)] = palette[i]
+end
