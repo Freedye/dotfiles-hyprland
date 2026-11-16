@@ -6,6 +6,8 @@ Item {
 
     property string glyph: ""
     property string value: ""
+    // optional icon after the value (e.g. the charging bolt)
+    property string badge: ""
     property color tint: Theme.fg
     property string tip: ""
     property alias hovered: hover.hovered
@@ -31,6 +33,14 @@ Item {
             visible: root.value !== ""
             text: root.value
             color: root.tint
+        }
+
+        Icon {
+            anchors.verticalCenter: parent.verticalCenter
+            visible: root.badge !== ""
+            text: root.badge
+            color: root.tint
+            font.pixelSize: 13
         }
     }
 

@@ -37,6 +37,7 @@ Singleton {
             volHigh: 0xF057E, volMed: 0xF0580, volLow: 0xF057F, volOff: 0xF0581, volMute: 0xF075F,
             headphones: 0xF02CB, headset: 0xF02CE,
             cpu: 0xF2DB, mem: 0xF035B, temp: 0xF2C9,
+            mouse: 0xF037D, keyboard: 0xF030C, bolt: 0xF140B,
             wifi: 0xF1EB, ethernet: 0xF0200, warn: 0xF071,
             prev: 0xF048, next: 0xF051, play: 0xF04B, pause: 0xF04C,
             left: 0xF053, right: 0xF054, check: 0xF00C,

@@ -16,6 +16,10 @@ Island {
     readonly property color tempTint: Stats.temp >= 80 ? Theme.danger : Stats.temp >= 70 ? Theme.warm : Theme.fg
     readonly property color cpuTint: Stats.cpu >= 90 ? Theme.danger : Theme.fg
 
+    function batteryTint(level) {
+        return level < 0 ? Theme.dim : level <= 10 ? Theme.danger : level <= 20 ? Theme.warm : Theme.fg;
+    }
+
     spacing: 0
     animateWidth: false
 
@@ -83,6 +87,35 @@ Island {
                 value: `${Stats.temp}°C`
                 tint: root.tempTint
                 tip: Stats.temp >= 80 ? "Temperatura critica!" : `GPU  ${Stats.temp}°C`
+            }
+
+            Rectangle {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 1
+                height: 14
+                color: Theme.alpha(Theme.dim, 0.5)
+            }
+
+            Stat {
+                anchors.verticalCenter: parent.verticalCenter
+                glyph: Theme.ico.mouse
+                value: Batteries.mouse >= 0 ? `${Batteries.mouse}%` : "—"
+                badge: Batteries.mouse >= 0 && Batteries.mouseCharge === 1 ? Theme.ico.bolt : ""
+                tint: root.batteryTint(Batteries.mouse)
+                tip: Batteries.mouse < 0 ? "Mouse non raggiungibile"
+                    : `Mouse  ${Batteries.mouse}%`
+                      + (Batteries.mouseCharge === 1 ? "\nIn carica" : Batteries.mouseCharge === 2 ? "\nCarica completa" : "")
+            }
+
+            Stat {
+                anchors.verticalCenter: parent.verticalCenter
+                glyph: Theme.ico.keyboard
+                value: Batteries.keyboard >= 0 ? `${Batteries.keyboard}%` : "—"
+                badge: Batteries.keyboard >= 0 && Batteries.keyboardCharge === 1 ? Theme.ico.bolt : ""
+                tint: root.batteryTint(Batteries.keyboard)
+                tip: Batteries.keyboard < 0 ? "Tastiera non raggiungibile"
+                    : `Tastiera  ${Batteries.keyboard}%  (${(Batteries.keyboardMv / 1000).toFixed(2)} V)`
+                      + (Batteries.keyboardCharge === 1 ? "\nIn carica" : Batteries.keyboardCharge === 2 ? "\nCarica completa" : "")
             }
 
             Rectangle {
