@@ -927,3 +927,26 @@ dialog.background, dialog.background:backdrop {
     border: 1px solid alpha(@color8, 0.9);
 }
 dialog progressbar trough, dialog progressbar progress { min-height: 6px; }
+
+/* dialog header bar (e.g. network password, Annulla/Connetti): raised like the dialog body, with a separator,
+   and the plain buttons get a fill so they read as buttons */
+dialog.background headerbar.titlebar, dialog.background headerbar.titlebar:backdrop {
+    background-color: mix(@background, @foreground, 0.07);
+    border-bottom: 1px solid alpha(@color8, 0.9);
+}
+dialog:not(.zz):not(.zy) headerbar button:not(.suggested-action):not(.destructive-action):not(:hover):not(:active):not(:checked):not(:disabled) {
+    background-color: mix(@background, @foreground, 0.16);
+}
+
+/* message dialogs (e.g. the error after Annulla): raised and bordered like the other dialogs,
+   separator above the buttons, plain buttons with a fill */
+messagedialog.background, messagedialog.background:backdrop,
+messagedialog.background .titlebar, messagedialog.background .titlebar:backdrop,
+messagedialog.background .dialog-vbox, messagedialog.background .dialog-action-area {
+    background-color: mix(@background, @foreground, 0.07);
+}
+messagedialog.background { border: 1px solid alpha(@color8, 0.9); }
+messagedialog.background .dialog-action-area { border-top: 1px solid alpha(@color8, 0.9); }
+messagedialog:not(.zz):not(.zy) .dialog-action-area button:not(.suggested-action):not(.destructive-action):not(:hover):not(:active):not(:checked):not(:disabled) {
+    background-color: mix(@background, @foreground, 0.16);
+}
