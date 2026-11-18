@@ -141,13 +141,43 @@ Island {
         }
     }
 
-    Icon {
+    // handle: a "<" that lights up in a circle on hover and stays lit while pinned
+    Item {
+        id: handle
+
+        readonly property bool lit: root.pinned || handleHover.hovered
+
         anchors.verticalCenter: parent.verticalCenter
-        width: 15
-        horizontalAlignment: Text.AlignLeft
-        text: Theme.ico.drawer
-        color: root.pinned ? Theme.accent : handleHover.hovered ? Theme.accent : Theme.fg
-        rotation: 180 * root.reveal
+        width: 20
+        height: 20
+
+        Rectangle {
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
+            radius: width / 2
+            color: Theme.accent
+            opacity: root.pinned ? 0.32 : handleHover.hovered ? 0.2 : 0
+            scale: handle.lit ? 1 : 0.5
+
+            Behavior on opacity {
+                NumberAnimation { duration: 160 }
+            }
+            Behavior on scale {
+                NumberAnimation { duration: 200; easing.type: Easing.OutBack }
+            }
+        }
+
+        Icon {
+            anchors.centerIn: parent
+            // nudged so the chevron looks centered in the circle
+            anchors.horizontalCenterOffset: root.reveal > 0.5 ? 1 : -1
+            text: Theme.ico.left
+            font.pixelSize: 11
+            color: handle.lit ? Theme.accent : Theme.fg
+            // points left when closed, right when open
+            rotation: 180 * root.reveal
+        }
 
         HoverHandler {
             id: handleHover

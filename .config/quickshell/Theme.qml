@@ -33,7 +33,7 @@ Singleton {
 
     readonly property var ico: {
         const codes = {
-            power: 0xF0425, drawer: 0xF0AAB,
+            power: 0xF0425,
             volHigh: 0xF057E, volMed: 0xF0580, volLow: 0xF057F, volOff: 0xF0581, volMute: 0xF075F,
             headphones: 0xF02CB, headset: 0xF02CE,
             cpu: 0xF2DB, mem: 0xF035B, temp: 0xF2C9,
