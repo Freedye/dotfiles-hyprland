@@ -126,12 +126,9 @@ ShellRoot {
         id: sessionModel
         property int lastIndex: 0
         function refreshLast() {
-            let fallback = 0;
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < count; i++)
                 if (get(i).name === last.session) { lastIndex = i; return; }
-                if (get(i).name.indexOf("uwsm") !== -1) fallback = i;
-            }
-            lastIndex = fallback;
+            lastIndex = 0;
         }
     }
 
@@ -140,6 +137,9 @@ ShellRoot {
         command: ["sh", "-c",
             "for f in /usr/share/wayland-sessions/*.desktop; do " +
             "  grep -qiE '^(Hidden|NoDisplay)=true' \"$f\" && continue; " +
+            // skip sessions whose TryExec program is not installed (e.g. uwsm)
+            "  t=$(grep -m1 '^TryExec=' \"$f\" | cut -d= -f2-); " +
+            "  [ -n \"$t\" ] && ! command -v \"$t\" >/dev/null 2>&1 && continue; " +
             "  printf '%s\\t%s\\t%s\\n' \"$(grep -m1 '^Name=' \"$f\" | cut -d= -f2-)\" " +
             "    \"$(grep -m1 '^Exec=' \"$f\" | cut -d= -f2-)\" " +
             "    \"$(grep -m1 '^DesktopNames=' \"$f\" | cut -d= -f2-)\"; " +

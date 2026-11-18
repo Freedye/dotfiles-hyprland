@@ -6,5 +6,6 @@
 hl.on("hyprland.start", function () 
     hl.exec_cmd("hyprpaper & qs")
     hl.exec_cmd("/usr/local/bin/xembedsniproxy")
+    hl.exec_cmd("openrgb --startminimized")  -- applies its own startup profile
     hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
 end)
