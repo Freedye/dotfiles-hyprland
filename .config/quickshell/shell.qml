@@ -20,6 +20,13 @@ ShellRoot {
         NotifPopups {}
     }
 
+    // polkit password prompt, on every screen (the card goes on the focused one)
+    Variants {
+        model: Quickshell.screens
+
+        PolkitDialog {}
+    }
+
     // confirmation dialog for shutdown / restart / logout, on every screen
     Variants {
         model: Quickshell.screens
