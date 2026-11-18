@@ -19,6 +19,7 @@ hl.config({
         accel_profile = "flat",
     },
     animations = { enabled = false },
+    xwayland = { enabled = false },  -- the greeter is pure Wayland, no X server needed
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
