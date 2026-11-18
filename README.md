@@ -27,7 +27,7 @@
   - **kitty**: The terminal
   - **mako**: The notification daemon
   - **pcmanfm**: The file manager
-  - **quickshell**: The upper bar, tray and power menu
+  - **quickshell**: The upper bar (window title, clock and calendar, media and audio, hardware stats and device batteries), tray and power menu
   - **wofi**: The launcher
   - **grim & slurp**: The screenshoot utility
   - **wl-copy**: The clipboard utility
