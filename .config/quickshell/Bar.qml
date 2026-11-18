@@ -41,6 +41,9 @@ PanelWindow {
             Hardware {
                 appearDelay: 280
             }
+            NotifCenter {
+                appearDelay: 315
+            }
             Clock {
                 appearDelay: 350
             }

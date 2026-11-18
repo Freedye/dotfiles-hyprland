@@ -41,7 +41,8 @@ Singleton {
             wifi: 0xF1EB, ethernet: 0xF0200, warn: 0xF071,
             prev: 0xF048, next: 0xF051, play: 0xF04B, pause: 0xF04C,
             left: 0xF053, right: 0xF054, check: 0xF00C,
-            suspend: 0xF04B2, restart: 0xF0709, lock: 0xF033E, logout: 0xF0343
+            suspend: 0xF04B2, restart: 0xF0709, lock: 0xF033E, logout: 0xF0343,
+            bell: 0xF009A, bellOff: 0xF009B, close: 0xF0156
         };
         const out = {};
         for (const k in codes)
