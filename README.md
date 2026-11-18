@@ -20,6 +20,7 @@
   <summary>Programs used</summary>
      
   - **Hyprland**: The compositor
+  - **greetd**: The login manager, with a lain-themed greeter written in quickshell
   - **Hyprlock**: The screen lock
   - **Hyprpaper**: The wallpapers utility
   - **pywal16**: Automatic color scheme generation from the wallpaper
@@ -92,6 +93,43 @@
   Hyprland and mako read the pywal16 colors when they load their config, so after changing the wallpaper run `hyprctl reload` and `makoctl reload`.
 </details>
 
+ <details>
+  <summary>Login screen (greetd)</summary>
+
+  The login screen is a quickshell greeter (`etc/greetd/lain-greeter`) running inside a minimal Hyprland instance (`etc/greetd/hyprland.lua`), started by greetd. greetd does the actual authentication (PAM) as root and starts the session; the greeter runs as the unprivileged `greeter` user and only draws the screen and forwards the password.
+
+  - The form is shown only on `DP-1` and `DP-2` is turned off until the session starts: change the `hl.monitor` lines and `LAIN_PRIMARY` in `etc/greetd/hyprland.lua` to match your monitors.
+  - The last user and session are remembered in `/var/lib/lain-greeter`.
+  - The output of the greeter and of the session launcher goes to the journal instead of the screen.
+  - No autologin: the password is always asked before anything of the session starts.
+  - The ArcadeClassic font must be installed system-wide (e.g. in `/usr/share/fonts`), since the `greeter` user can't see your user fonts.
+
+  Install (files are copied, not linked, since the `greeter` user can't read your home):
+
+  ```sh
+  sudo pacman -S --needed greetd quickshell
+  sudo install -d -m 755 /etc/greetd/lain-greeter/{Components,Assets,Backgrounds}
+  sudo install -m 644 etc/greetd/lain-greeter/{shell.qml,Greeter.qml,LICENSE} /etc/greetd/lain-greeter/
+  sudo install -m 644 etc/greetd/lain-greeter/Components/*.qml /etc/greetd/lain-greeter/Components/
+  sudo install -m 644 etc/greetd/lain-greeter/Assets/*.svg /etc/greetd/lain-greeter/Assets/
+  sudo install -m 644 etc/greetd/lain-greeter/Backgrounds/lain.jpg /etc/greetd/lain-greeter/Backgrounds/
+  sudo install -m 644 etc/greetd/{config.toml,config-agreety.toml,hyprland.lua} /etc/greetd/
+  sudo install -d -m 700 -o greeter -g greeter /var/lib/lain-greeter
+  sudo systemctl enable greetd   # disable your current display manager first
+  ```
+
+  Preview it without logging out (any password but `lain` fails, `Esc` quits): `LAIN_PRIMARY=DP-1 quickshell -p etc/greetd/lain-greeter/shell.qml`.
+
+  If the greeter breaks, switch to another TTY (`Ctrl+Alt+F2`), log in and fall back to the plain-text greeter:
+
+  ```sh
+  sudo cp /etc/greetd/config-agreety.toml /etc/greetd/config.toml
+  sudo systemctl restart greetd
+  ```
+
+  Logs: `journalctl -b -u greetd`, `journalctl -b -t lain-greeter` (greeter), `journalctl -b -t hyprland-session` (session launcher).
+</details>
+
 <div align="center">
     <h2>• inspirations •</h2>
     <h3></h3>
@@ -113,6 +151,6 @@
 
 <div align="center">
 
-Licensed under the [Apache License 2.0](LICENSE).
+Licensed under the [Apache License 2.0](LICENSE), except `etc/greetd/lain-greeter`, which is derived from [Keyitdev](https://github.com/Keyitdev)'s astronaut theme and is licensed under the [GPLv3+](etc/greetd/lain-greeter/LICENSE).
 
 </div>
