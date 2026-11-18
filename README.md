@@ -19,17 +19,14 @@
  <details> 
   <summary>Programs used</summary>
      
-  - **Hyprland**: The compositor
+  - **Hyprland**: The compositor, started directly by the login manager (no uwsm)
   - **greetd**: The login manager, with a lain-themed greeter written in quickshell
-  - **Hyprlock**: The screen lock
   - **Hyprpaper**: The wallpapers utility
   - **pywal16**: Automatic color scheme generation from the wallpaper
   - **fastfetch**: To fetch system infos
   - **kitty**: The terminal
-  - **mako**: The notification daemon
   - **pcmanfm**: The file manager
-  - **quickshell**: The upper bar (window title, clock and calendar, media and audio, hardware stats and device batteries), tray and power menu
-  - **wofi**: The launcher
+  - **quickshell**: The whole shell: upper bar (window title, clock and calendar, media and audio, hardware stats and device batteries, Bluetooth, notifications), tray, power menu, app launcher, notification popups, polkit prompt and screen lock
   - **grim & slurp**: The screenshoot utility
   - **wl-copy**: The clipboard utility
 </details>
@@ -54,10 +51,13 @@
   <summary>Dependencies & setup</summary>
 
   Besides the [programs listed above](#software-overview), these dotfiles also expect:
-  - **[Maple Mono](https://github.com/subframe7536/maple-font)**: font used across kitty, mako, wofi and hyprlock
+  - **[Maple Mono](https://github.com/subframe7536/maple-font)**: font used across kitty and quickshell
+  - **[JetBrainsMono Nerd Font](https://www.nerdfonts.com/)**: icon font of the bar and the screen lock
+  - **ArcadeClassic**: font of the login and lock screens, installed system-wide (e.g. in `/usr/share/fonts`)
   - **[rose-pine-hyprcursor](https://github.com/ndom91/rose-pine-hyprcursor)**: cursor theme
   - **wal-flat**: flat GTK theme that follows the live pywal16 palette, for GTK3 and GTK4 apps (included under `.themes/wal-flat`). libadwaita apps ignore GTK themes, so `.config/gtk-4.0/gtk.css` applies the same palette through their named colors
-  - **hyprpolkitagent**: polkit authentication agent
+  - **[Tela](https://github.com/vinceliuice/Tela-icon-theme)**: GTK icon theme, also used by the launcher (it follows whatever `gsettings` icon theme is set)
+  - **OpenRGB**: started minimized from `autostart.lua`, remove that line if you don't use it
   - **[xembedsniproxy](https://github.com/Freedye/xembedsniproxy-standalone)**: XEmbed system tray proxy (installed at `/usr/local/bin`)
 
   To use these configs, clone the repo and symlink (or copy) the folders/files you want into your `$HOME` and `~/.config`, e.g.:
@@ -68,29 +68,40 @@
   ln -s "$PWD/.config/hypr"       ~/.config/hypr
   ln -s "$PWD/.config/quickshell" ~/.config/quickshell
   ln -s "$PWD/.config/kitty"      ~/.config/kitty
-  ln -s "$PWD/.config/mako"       ~/.config/mako
-  ln -s "$PWD/.config/wofi"       ~/.config/wofi
   ln -s "$PWD/.config/fastfetch"  ~/.config/fastfetch
   ln -s "$PWD/.themes/wal-flat"   ~/.themes/wal-flat
   ln -s "$PWD/.zshrc"             ~/.zshrc
   ln -s "$PWD/.gtkrc-2.0"         ~/.gtkrc-2.0
 
   # single files, so the other contents of these folders are left alone
-  mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0 ~/.config/wal/templates
+  mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0
   ln -s "$PWD/.config/gtk-3.0/settings.ini"        ~/.config/gtk-3.0/settings.ini
   ln -s "$PWD/.config/gtk-4.0/settings.ini"        ~/.config/gtk-4.0/settings.ini
   ln -s "$PWD/.config/gtk-4.0/gtk.css"             ~/.config/gtk-4.0/gtk.css
-  ln -s "$PWD/.config/wal/templates/colors-mako"   ~/.config/wal/templates/colors-mako
 
   # GTK3 apps read the theme from gsettings first
   gsettings set org.gnome.desktop.interface gtk-theme wal-flat
   ```
 
   Then, before linking:
-  - replace the `<PATH_TO_...>` placeholders (wallpaper, profile picture) in `hyprpaper.conf` and `hyprlock.conf` with your own paths;
+  - replace the `<PATH_TO_...>` placeholders (wallpaper) in `hyprpaper.conf` with your own paths;
   - replace `/home/user` with your home directory in the files that contain it (GTK CSS cannot expand `~` or `$HOME`): `grep -rl /home/user --exclude-dir=.git --exclude=README.md . | xargs sed -i "s|/home/user|$HOME|g"`.
 
-  Hyprland and mako read the pywal16 colors when they load their config, so after changing the wallpaper run `hyprctl reload` and `makoctl reload`.
+  Hyprland reads the pywal16 colors when it loads its config, so after changing the wallpaper run `hyprctl reload`; quickshell follows `~/.cache/wal/colors.json` live.
+</details>
+
+ <details>
+  <summary>Shell (quickshell)</summary>
+
+  Everything runs in the bar's `qs` process except the screen lock, which is a separate config started on demand, so a crash of the bar can't take it down.
+
+  - **Launcher** (`Launcher.qml`), `SUPER+SPACE`: type to search, `Up`/`Down` or `Tab` to move, `Enter` to launch, `Esc` to close. It takes app icons from the GTK icon theme (`scripts/launcher-index.sh`), while the bar keeps `QS_ICON_THEME` for the tray.
+  - **Notifications** (`Notifs.qml`, `NotifPopups.qml`, `NotifCard.qml`, `NotifCenter.qml`): popups in the top-right corner (low 5s, normal 10s, critical until closed, paused on hover; left click runs the default action, right click dismisses). The bell in the bar opens the history (left click) and toggles do-not-disturb (right click).
+  - **Bluetooth** (`BluetoothIsland.qml`): left click opens the device list (connect, disconnect, pair, forget, scan), right click turns the adapter on or off. There is no pairing agent: pair devices that ask for a PIN with `bluetoothctl`.
+  - **Polkit** (`PolkitAuth.qml`, `PolkitDialog.qml`): password prompt for admin actions, on the focused screen.
+  - **Screen lock** (`lock/`), `SUPER+L` or the power menu: same look as the login screen, with the same user picture (`/var/lib/AccountsService/icons/<user>`, see the login screen install), password field on `DP-1` (`LAIN_PRIMARY`), the other screens stay black. It uses the `login` PAM service. `misc.allow_session_lock_restore` is on, so if it ever crashes you can switch to a TTY and start it again with `hyprctl --instance 0 dispatch 'hl.dsp.exec_cmd("qs -n -p ~/.config/quickshell/lock/shell.qml")'`. Preview it without locking (password `lain`, `Esc` quits): `LAIN_LOCK_PREVIEW=1 qs -p ~/.config/quickshell/lock/shell.qml`.
+
+  IPC, e.g. for keybinds: `qs ipc call launcher toggle`, `qs ipc call notifications clear|toggleDnd|count`, `qs ipc call bluetooth toggle|power`.
 </details>
 
  <details>
@@ -100,6 +111,7 @@
 
   - The form is shown only on `DP-1` and `DP-2` is turned off until the session starts: change the `hl.monitor` lines and `LAIN_PRIMARY` in `etc/greetd/hyprland.lua` to match your monitors.
   - The last user and session are remembered in `/var/lib/lain-greeter`.
+  - The selected user's picture is read from `/var/lib/AccountsService/icons/<user>` (the `greeter` user can't read home directories); without it, no picture is shown.
   - The output of the greeter and of the session launcher goes to the journal instead of the screen.
   - No autologin: the password is always asked before anything of the session starts.
   - The ArcadeClassic font must be installed system-wide (e.g. in `/usr/share/fonts`), since the `greeter` user can't see your user fonts.
@@ -115,6 +127,7 @@
   sudo install -m 644 etc/greetd/lain-greeter/Backgrounds/lain.jpg /etc/greetd/lain-greeter/Backgrounds/
   sudo install -m 644 etc/greetd/{config.toml,config-agreety.toml,hyprland.lua} /etc/greetd/
   sudo install -d -m 700 -o greeter -g greeter /var/lib/lain-greeter
+  sudo install -D -m 644 .config/hypr/img/profile.webp /var/lib/AccountsService/icons/$USER   # your picture
   sudo systemctl enable greetd   # disable your current display manager first
   ```
 
