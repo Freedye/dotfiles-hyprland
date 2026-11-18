@@ -20,6 +20,9 @@ ShellRoot {
         NotifPopups {}
     }
 
+    // app launcher (SUPER+SPACE)
+    Launcher {}
+
     // polkit password prompt, on every screen (the card goes on the focused one)
     Variants {
         model: Quickshell.screens
