@@ -6,6 +6,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Effects
+import Quickshell
 
 Column {
     id: inputContainer
@@ -23,6 +25,52 @@ Column {
         height: root.font.pointSize * 2
         width: parent.width / 2
         anchors.horizontalCenter: parent.horizontalCenter
+
+        // Picture of the selected user in a circle, outside the layout so the rest stays where it is.
+        // Read from the AccountsService path (the greeter user can't read home directories).
+        Item {
+            id: avatar
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.top
+            anchors.bottomMargin: 24
+            width: 95
+            height: 95
+            visible: picture.status === Image.Ready && username.text !== ""
+
+            Image {
+                id: picture
+                anchors.fill: parent
+                source: username.text === "" ? ""
+                    : "file://" + (Quickshell.env("LAIN_FACES_DIR") || "/var/lib/AccountsService/icons") + "/" + username.text.toLowerCase()
+                fillMode: Image.PreserveAspectCrop
+                sourceSize: Qt.size(190, 190)
+                asynchronous: true
+                mipmap: true
+                visible: false
+            }
+            Rectangle {
+                id: circle
+                anchors.fill: parent
+                radius: width / 2
+                visible: false
+                layer.enabled: true
+            }
+            MultiEffect {
+                anchors.fill: parent
+                source: picture
+                maskEnabled: true
+                maskSource: circle
+                maskThresholdMin: 0.5
+                maskSpreadAtMin: 1.0
+            }
+            Rectangle { // ring
+                anchors.fill: parent
+                radius: width / 2
+                color: "transparent"
+                border.width: 2
+                border.color: config.userIconColor
+            }
+        }
 
         Label {
             id: errorMessage
