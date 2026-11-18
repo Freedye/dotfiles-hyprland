@@ -38,7 +38,7 @@ Singleton {
             cmd: ["systemctl", "suspend"]
         },
         lock: {
-            cmd: ["hyprlock"]
+            cmd: ["qs", "-n", "-p", Quickshell.env("HOME") + "/.config/quickshell/lock/shell.qml"]
         }
     })
 

@@ -8,7 +8,7 @@ hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(menu))
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
 hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))    -- dwindle only
-hl.bind("SUPER + L", hl.dsp.exec_cmd(hyprlock))
+hl.bind("SUPER + L", hl.dsp.exec_cmd(lockscreen))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(screenshoot))
 
 -- Switch workspaces with mainMod + [0-9]
