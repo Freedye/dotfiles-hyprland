@@ -42,7 +42,8 @@ Singleton {
             prev: 0xF048, next: 0xF051, play: 0xF04B, pause: 0xF04C,
             left: 0xF053, right: 0xF054, check: 0xF00C,
             suspend: 0xF04B2, restart: 0xF0709, lock: 0xF033E, logout: 0xF0343,
-            bell: 0xF009A, bellOff: 0xF009B, close: 0xF0156, shield: 0xF0565
+            bell: 0xF009A, bellOff: 0xF009B, close: 0xF0156, shield: 0xF0565,
+            bt: 0xF00AF, btConnected: 0xF00B1, btOff: 0xF00B2
         };
         const out = {};
         for (const k in codes)

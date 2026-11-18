@@ -41,6 +41,9 @@ PanelWindow {
             Hardware {
                 appearDelay: 280
             }
+            BluetoothIsland {
+                appearDelay: 300
+            }
             NotifCenter {
                 appearDelay: 315
             }
