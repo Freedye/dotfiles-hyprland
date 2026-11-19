@@ -18,7 +18,11 @@ PanelWindow {
         right: 8
     }
     implicitWidth: 340
-    implicitHeight: Math.max(1, col.implicitHeight)
+    // room left for an open bar panel (Bluetooth, history, power menu)
+    property real offset: Notifs.panelInset
+    Behavior on offset { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
+
+    implicitHeight: Math.max(1, offset + col.implicitHeight)
     color: "transparent"
     visible: Notifs.popups.length > 0
     WlrLayershell.layer: WlrLayer.Overlay
@@ -27,6 +31,7 @@ PanelWindow {
 
     Column {
         id: col
+        y: win.offset
         width: parent.width
         spacing: 8
 

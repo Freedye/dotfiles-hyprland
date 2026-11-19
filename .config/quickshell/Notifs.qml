@@ -13,6 +13,8 @@ Singleton {
     property bool dnd: false
     // notifications currently shown as popups, newest first
     property var popups: []
+    // height of the bar panel open in the top-right corner: the popups stack under it
+    property real panelInset: 0
     // everything not dismissed yet, newest first
     readonly property var history: [...server.trackedNotifications.values].reverse()
     readonly property int maxHistory: 50

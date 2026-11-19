@@ -40,7 +40,10 @@ Island {
 
         property bool wantOpen: false
 
-        anchor.item: root
+        // right edge in line with the notification popups, 8px from the screen edge
+        anchor.item: root.QsWindow.contentItem
+        anchor.rect.width: (root.QsWindow.contentItem?.width ?? 8) - 8
+        anchor.rect.height: Theme.barHeight
         anchor.edges: Edges.Bottom | Edges.Right
         anchor.gravity: Edges.Bottom | Edges.Left
         anchor.adjustment: PopupAdjustment.Slide
@@ -48,6 +51,14 @@ Island {
         visible: wantOpen || card.opacity > 0.01
         implicitWidth: card.width
         implicitHeight: card.height + 8
+
+        // push the notification popups under this panel
+        Binding {
+            target: Notifs
+            property: "panelInset"
+            value: card.height + 8
+            when: panel.wantOpen
+        }
 
         HyprlandFocusGrab {
             windows: [panel]

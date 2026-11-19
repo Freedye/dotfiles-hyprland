@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 
-// The "Apple menu": a drop-down under the power button, right-aligned to it.
+// The "Apple menu": a drop-down under the power button, right-aligned with the notifications.
 PopupWindow {
     id: root
 
@@ -22,7 +22,10 @@ PopupWindow {
         wantOpen = !wantOpen;
     }
 
-    anchor.item: target
+    // right edge in line with the notification popups, 8px from the screen edge
+    anchor.item: target.QsWindow.contentItem
+    anchor.rect.width: (target.QsWindow.contentItem?.width ?? 8) - 8
+    anchor.rect.height: Theme.barHeight
     anchor.edges: Edges.Bottom | Edges.Right
     anchor.gravity: Edges.Bottom | Edges.Left
     anchor.adjustment: PopupAdjustment.Slide
@@ -30,6 +33,14 @@ PopupWindow {
     visible: wantOpen || card.opacity > 0.01
     implicitWidth: card.width
     implicitHeight: card.height + 8
+
+    // push the notification popups under this panel
+    Binding {
+        target: Notifs
+        property: "panelInset"
+        value: card.height + 8
+        when: root.wantOpen
+    }
 
     HyprlandFocusGrab {
         windows: [root]

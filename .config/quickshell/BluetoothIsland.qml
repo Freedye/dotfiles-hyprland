@@ -54,7 +54,10 @@ Island {
         // stop scanning when the panel closes
         onWantOpenChanged: if (!wantOpen && root.adapter?.discovering) root.adapter.discovering = false
 
-        anchor.item: root
+        // right edge in line with the notification popups, 8px from the screen edge
+        anchor.item: root.QsWindow.contentItem
+        anchor.rect.width: (root.QsWindow.contentItem?.width ?? 8) - 8
+        anchor.rect.height: Theme.barHeight
         anchor.edges: Edges.Bottom | Edges.Right
         anchor.gravity: Edges.Bottom | Edges.Left
         anchor.adjustment: PopupAdjustment.Slide
@@ -62,6 +65,14 @@ Island {
         visible: wantOpen || card.opacity > 0.01
         implicitWidth: card.width
         implicitHeight: card.height + 8
+
+        // push the notification popups under this panel
+        Binding {
+            target: Notifs
+            property: "panelInset"
+            value: card.height + 8
+            when: panel.wantOpen
+        }
 
         HyprlandFocusGrab {
             windows: [panel]
@@ -78,7 +89,7 @@ Island {
         Rectangle {
             id: card
             y: 8 + (panel.wantOpen ? 0 : -8)
-            width: 300
+            width: 340 // same as the notification cards
             height: header.height + list.implicitHeight + 22
             color: Theme.alpha(Theme.bg, 0.985)
             border.width: 1
@@ -192,7 +203,7 @@ Island {
                             }
                             Txt {
                                 anchors.verticalCenter: parent.verticalCenter
-                                width: 150
+                                width: 190
                                 text: row.dev.name || row.dev.address
                                 elide: Text.ElideRight
                                 color: row.dev.paired ? Theme.fg : Theme.alpha(Theme.fg, 0.7)
