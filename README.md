@@ -36,11 +36,11 @@
     <h3></h3>
 </div>
 
-| Base view | Some programs |
-|:---|:---------------|
-| <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022222.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251211-174001.png" /> |
-| Wallpaper change | Automatic color switch with pywal16 |
-| <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-024358.png" /> | <img width="1920" height="1080" alt="image" src="https://raw.githubusercontent.com/Freedye/dotfiles-hyprland/refs/heads/master/assets/20251210-022314.png" /> |
+| Desktop | Launcher |
+|:---|:---|
+| <img alt="Desktop" src="assets/desktop.png" /> | <img alt="Launcher" src="assets/launcher.png" /> |
+| Notifications & Bluetooth | Login screen & lockscreen |
+| <img alt="Notifications and Bluetooth" src="assets/notifications.png" /> | <img alt="Login screen" src="assets/login.png" /> |
 
 <div align="center">
     <h2>• installation •</h2>
