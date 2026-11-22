@@ -78,6 +78,7 @@ ShellRoot {
     QtObject {
         id: textConstants
         property string loginFailed: "Login failed"
+        property string wrongPassword: "Wrong password"
         property string userName: "Username"
         property string password: "Password"
     }
@@ -174,6 +175,9 @@ ShellRoot {
         property string pendingPassword: ""
         property int pendingSession: -1
         property bool answered: false
+        // Last info/error text PAM sent without asking for an answer (e.g. faillock's
+        // "account locked"): more useful than a generic "wrong password".
+        property string notice: ""
 
         function login(user, password, sessionIndex) {
             if (busy || user === "") return;
@@ -182,6 +186,7 @@ ShellRoot {
             pendingPassword = password;
             pendingSession = sessionIndex;
             answered = false;
+            notice = "";
             last.user = user;
 
             if (!shell.live) {
@@ -213,7 +218,7 @@ ShellRoot {
         property bool ok: false
         interval: 400
         onTriggered: {
-            if (!ok) { auth.fail(""); return; }
+            if (!ok) { auth.fail(textConstants.wrongPassword); return; }
             const s = auth.sessionCommand();
             console.log("[preview] login ok, would launch:", JSON.stringify(s.argv), "desktop:", s.desktop);
             auth.busy = false;
@@ -226,9 +231,12 @@ ShellRoot {
         target: shell.live ? Greetd : null
 
         function onAuthMessage(message, error, responseRequired, echoResponse) {
-            if (!responseRequired) return;            // info/error text from PAM, nothing to answer
+            if (!responseRequired) {                   // info/error text from PAM, nothing to answer
+                if (message !== "") auth.notice = message;
+                return;
+            }
             if (auth.answered) {                       // second prompt (2FA, expired password...): unsupported
-                auth.fail(message);
+                auth.fail(message || textConstants.loginFailed);
                 return;
             }
             auth.answered = true;
@@ -236,8 +244,8 @@ ShellRoot {
             auth.pendingPassword = "";
         }
 
-        function onAuthFailure(message) { auth.fail(""); }
-        function onError(error) { auth.fail(error); }
+        function onAuthFailure(message) { auth.fail(auth.notice || textConstants.wrongPassword); }
+        function onError(error) { auth.fail(error || textConstants.loginFailed); }
 
         function onReadyToLaunch() {
             const s = auth.sessionCommand();

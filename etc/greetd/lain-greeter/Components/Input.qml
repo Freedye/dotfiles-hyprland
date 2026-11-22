@@ -18,6 +18,9 @@ Column {
     property bool failed
     property string errorText: ""
 
+    // The error stays on screen until the user starts typing again.
+    function clearError() { failed = false; errorText = ""; }
+
     Item {
         id: errorMessageField
 
@@ -276,6 +279,7 @@ Column {
                 if(focus)
                     selectAll()
             }
+            onTextEdited: inputContainer.clearError()
 
             background: Rectangle {
                 color: config.loginFieldBackgroundColor
@@ -405,6 +409,7 @@ Column {
             renderType: Text.QtRendering
             selectByMouse: true
             readOnly: auth.busy
+            onTextEdited: inputContainer.clearError()
             
             background: Rectangle {
                 color: config.passwordFieldBackgroundColor
@@ -448,14 +453,6 @@ Column {
             password.text = ""
             password.forceActiveFocus()
             failed = true
-            resetError.running ? resetError.stop() && resetError.start() : resetError.start()
         }
-    }
-
-    Timer {
-        id: resetError
-        interval: 2000
-        onTriggered: { failed = false; errorText = "" }
-        running: false
     }
 }
