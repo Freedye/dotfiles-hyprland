@@ -18,10 +18,15 @@ ShellRoot {
     readonly property string user: Quickshell.env("USER") ?? ""
 
     // Typed password, shared by all surfaces so keys work whatever monitor has focus.
+    // The error stays on screen until the user starts typing again.
     property string password: ""
+    onPasswordChanged: if (password !== "") errorText = ""
     property bool busy: false
     property string errorText: ""
     property bool answered: false
+    // Last info/error text PAM sent without asking for an answer (e.g. faillock's
+    // "account locked"): more useful than a generic "wrong password".
+    property string notice: ""
     property bool revealed: false
 
     function isPrimary(screen) {
@@ -39,6 +44,7 @@ ShellRoot {
             return;
         }
         answered = false;
+        notice = "";
         pam.active = true;
     }
 
@@ -46,7 +52,6 @@ ShellRoot {
         busy = false;
         password = "";
         errorText = message;
-        errorReset.restart();
     }
 
     function unlock() {
@@ -63,7 +68,10 @@ ShellRoot {
         config: "login"
 
         function handle() {
-            if (!responseRequired) return;            // info text from PAM, nothing to answer
+            if (!responseRequired) {                  // info/error text from PAM, nothing to answer
+                if (message !== "") shell.notice = message;
+                return;
+            }
             if (shell.answered) {                     // second prompt (2FA, expired password...): unsupported
                 active = false;
                 shell.fail(message || "Login failed!");
@@ -79,14 +87,14 @@ ShellRoot {
 
         onCompleted: result => {
             if (result === PamResult.Success) shell.unlock();
-            else if (result === PamResult.MaxTries) shell.fail("Too many attempts");
-            else shell.fail("Login failed!");
+            else if (result === PamResult.MaxTries) shell.fail(shell.notice || "Too many attempts");
+            else if (result === PamResult.Failed) shell.fail(shell.notice || "Wrong password");
+            else shell.fail(shell.notice || "Login failed!");
         }
         onError: error => shell.fail(PamError.toString(error))
     }
 
-    Timer { id: mockTimer; interval: 400; onTriggered: shell.password === "lain" ? shell.unlock() : shell.fail("Login failed!") }
-    Timer { id: errorReset; interval: 2500; onTriggered: shell.errorText = "" }
+    Timer { id: mockTimer; interval: 400; onTriggered: shell.password === "lain" ? shell.unlock() : shell.fail("Wrong password") }
     // Give the compositor a moment to process the unlock before exiting.
     Timer { id: quitTimer; interval: 200; onTriggered: Qt.quit() }
 
