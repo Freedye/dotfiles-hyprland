@@ -49,7 +49,9 @@ Column {
         renderType: Text.QtRendering
 
         function updateTime() {
+            // Accents stripped ("lunedì" -> "lunedi"): ArcadeClassic has ASCII letters only.
             text = new Date().toLocaleDateString(Qt.locale(config.locale), config.dateFormat == "short" ? Locale.ShortFormat : config.dateFormat !== "" ? config.dateFormat : Locale.LongFormat)
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
         }
     }
 

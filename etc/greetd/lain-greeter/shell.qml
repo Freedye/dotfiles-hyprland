@@ -27,7 +27,7 @@ ShellRoot {
         property string font: "arcadeclassic"
         property string fontSize: "11"
         property string roundCorners: "20"
-        property string locale: ""
+        property string locale: "it_IT"
         property string hourFormat: "HH:mm"
         property string dateFormat: "dddd d"
         property string headerText: ""
@@ -72,14 +72,14 @@ ShellRoot {
         property string translatePlaceholderUsername: ""
         property string translatePlaceholderPassword: ""
         property string translateLoginFailedWarning: ""
-        property string translateSessionSelection: ""
+        property string translateSessionSelection: "Sessione"
     }
 
     QtObject {
         id: textConstants
-        property string loginFailed: "Login failed"
-        property string wrongPassword: "Wrong password"
-        property string userName: "Username"
+        property string loginFailed: "Accesso non riuscito"
+        property string wrongPassword: "Password errata"
+        property string userName: "Utente"
         property string password: "Password"
     }
 
