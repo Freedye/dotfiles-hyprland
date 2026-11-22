@@ -74,7 +74,7 @@ ShellRoot {
             }
             if (shell.answered) {                     // second prompt (2FA, expired password...): unsupported
                 active = false;
-                shell.fail(message || "Login failed!");
+                shell.fail(message || "Accesso non riuscito");
                 return;
             }
             shell.answered = true;
@@ -87,14 +87,17 @@ ShellRoot {
 
         onCompleted: result => {
             if (result === PamResult.Success) shell.unlock();
-            else if (result === PamResult.MaxTries) shell.fail(shell.notice || "Too many attempts");
-            else if (result === PamResult.Failed) shell.fail(shell.notice || "Wrong password");
-            else shell.fail(shell.notice || "Login failed!");
+            else if (result === PamResult.MaxTries) shell.fail(shell.notice || "Troppi tentativi");
+            else if (result === PamResult.Failed) shell.fail(shell.notice || "Password errata");
+            else shell.fail(shell.notice || "Accesso non riuscito");
         }
-        onError: error => shell.fail(PamError.toString(error))
+        onError: error => shell.fail(
+            error === PamError.StartFailed ? "Impossibile avviare PAM"
+            : error === PamError.TryAuthFailed ? "Errore di autenticazione PAM"
+            : "Errore interno di PAM")
     }
 
-    Timer { id: mockTimer; interval: 400; onTriggered: shell.password === "lain" ? shell.unlock() : shell.fail("Wrong password") }
+    Timer { id: mockTimer; interval: 400; onTriggered: shell.password === "lain" ? shell.unlock() : shell.fail("Password errata") }
     // Give the compositor a moment to process the unlock before exiting.
     Timer { id: quitTimer; interval: 200; onTriggered: Qt.quit() }
 

@@ -78,8 +78,9 @@ Item {
             }
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                // English like the login screen: ArcadeClassic has no accented letters.
-                text: clock.date.toLocaleDateString(Qt.locale("en_US"), "dddd d")
+                // Accents stripped ("lunedì" -> "lunedi"): ArcadeClassic has ASCII letters only.
+                text: clock.date.toLocaleDateString(Qt.locale("it_IT"), "dddd d")
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                 color: root.textColor
                 font.family: root.textFont
                 font.pointSize: root.pt * 2
